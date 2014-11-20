@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @will.title
+%p
+  %b User:
+  = @will.user_id
+
+= link_to 'Edit', edit_will_path(@will)
+\|
+= link_to 'Back', wills_path

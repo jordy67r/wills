@@ -1,0 +1,20 @@
+= form_for @general_detail, :builder => SurveyFormBuilder  do |f|
+  - if @general_detail.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@general_detail.errors.count, "error")} prohibited this general_detail from being saved:"
+      %ul
+        - @general_detail.errors.full_messages.each do |msg|
+          %li= msg
+
+  = f.text_field :relationship
+  = f.text_field :first_name
+  = f.text_field :middle_name
+  = f.text_field :surname
+  = f.text_field :address_one
+  = f.text_field :address_two
+  = f.text_field :city
+  = f.text_field :county
+  = f.text_field :postcode
+  = f.text_field :country
+  .actions
+    = f.submit 'Save'

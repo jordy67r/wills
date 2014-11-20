@@ -1,0 +1,19 @@
+= form_for [:will, @cash_gift] do |f|
+
+  .field
+    = f.label :shared_to
+    = f.text_field :shared_to
+  .field
+    = f.label :amount
+    = f.text_field :amount
+  .field
+    = f.label :certain_age
+    = f.text_field :certain_age
+  .field
+    = f.label :if_dead
+    = f.text_field :if_dead
+  .field
+    = f.label :certain_age_if_dead
+    = f.text_field :certain_age_if_dead
+  .actions
+    = f.submit 'Save'

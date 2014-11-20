@@ -1,0 +1,31 @@
+= form_for [:will, @guardian] do |f|
+
+  .field
+    = question "05010"
+    = f.check_box :appoint_future_guardians
+  .field
+    = question "05020"
+    = f.check_box :appoint_current_guardians
+  .field
+    = question "05030"
+    = f.check_box :second_guardian
+  .field
+    = question "05040"
+    = f.check_box :third_guardian
+  .field
+    = question "05050"
+    = f.check_box :forth_guardian
+  .field
+    = question "05060"
+    = f.check_box :replacement_guardian
+  .field
+    = question "05070"
+    = f.check_box :replacement_second_guardian
+  .field
+    = question "05080"
+    = f.check_box :replacement_third_guardian
+  .field
+    = question "05090"
+    = f.check_box :replacement_forth_guardian
+  .actions
+    = f.submit 'Save'

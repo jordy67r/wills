@@ -1,0 +1,16 @@
+= form_for [:will, @funeral] do |f|
+
+  .field
+    = question "02010"
+    = f.select :preference, ["I have no preference" , "I would like my body to be buried" , "I would like my body to be cremated"]
+  .field
+    = question "02020"
+    = f.text_area :wishes
+  .field
+    = question "02030"
+    = f.select :donate_organs, ["No preference" , "I would not like to donate my organs" , "Yes, all of my organs" , "Yes, specific organs"]
+  .field
+    = question "02040"
+    = f.text_area :specific_organs
+  .actions
+    = f.submit 'Save'

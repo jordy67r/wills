@@ -1,0 +1,10 @@
+= form_for [:will, @personal_gift] do |f|
+
+  .field
+    = f.label :description
+    = f.text_area :description
+  .field
+    = f.label :as_cash_if_sold
+    = f.check_box :as_cash_if_sold
+  .actions
+    = f.submit 'Save'

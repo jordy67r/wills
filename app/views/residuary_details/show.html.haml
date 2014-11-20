@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Share:
+  = @residuary_detail.share
+%p
+  %b Certain age:
+  = @residuary_detail.certain_age
+%p
+  %b If dead:
+  = @residuary_detail.if_dead
+%p
+  %b If dead certain age:
+  = @residuary_detail.if_dead_certain_age
+%p
+  %b Type:
+  = @residuary_detail.type
+
+= link_to 'Edit', edit_residuary_detail_path(@residuary_detail)
+\|
+= link_to 'Back', residuary_details_path

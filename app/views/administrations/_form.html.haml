@@ -1,0 +1,22 @@
+= form_for [:will, @administration] do |f|
+
+  .field
+    = question "04010"
+    = f.select :accept_admin, [['Yes', true], ['No', false]]
+  .field
+    = question "04020"
+    = f.check_box :expanded_powers
+  .field
+    = question "04030"
+    = f.check_box :borrow_powers
+  .field
+    = question "04040"
+    = f.check_box :appoint_admin_powers
+  .field
+    = question "04050"
+    = f.check_box :buy_sell_powers
+  .field
+    = question "04060"
+    = f.check_box :liability_powers
+  .actions
+    = f.submit 'Save'

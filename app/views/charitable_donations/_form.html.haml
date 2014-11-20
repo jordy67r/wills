@@ -1,0 +1,16 @@
+= form_for [:will, @charitable_donation] do |f|
+
+  .field
+    = f.label :charity_id
+    = f.number_field :charity_id
+  .field
+    = f.label :amount
+    = f.text_field :amount
+  .field
+    = f.label :instruction
+    = f.text_area :instruction
+  .field
+    = f.label :allow_alternate
+    = f.check_box :allow_alternate
+  .actions
+    = f.submit 'Save'

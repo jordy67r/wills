@@ -1,0 +1,25 @@
+= form_for @residuary_detail do |f|
+  - if @residuary_detail.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@residuary_detail.errors.count, "error")} prohibited this residuary_detail from being saved:"
+      %ul
+        - @residuary_detail.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.label :share
+    = f.text_field :share
+  .field
+    = f.label :certain_age
+    = f.text_field :certain_age
+  .field
+    = f.label :if_dead
+    = f.text_field :if_dead
+  .field
+    = f.label :if_dead_certain_age
+    = f.text_field :if_dead_certain_age
+  .field
+    = f.label :type
+    = f.text_field :type
+  .actions
+    = f.submit 'Save'

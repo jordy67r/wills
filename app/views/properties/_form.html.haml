@@ -1,0 +1,25 @@
+= form_for [:will, @property] do |f|
+
+  .field
+    = f.label :sole_residence
+    = f.check_box :sole_residence
+  .field
+    = f.label :recipient_no
+    = f.number_field :recipient_no
+  .field
+    = f.label :joint_or_common
+    = f.text_field :joint_or_common
+  .field
+    = f.label :responsible_for_charges
+    = f.check_box :responsible_for_charges
+  .field
+    = f.label :as_cash_if_sold
+    = f.check_box :as_cash_if_sold
+  .field
+    = f.label :held_in_trust
+    = f.check_box :held_in_trust
+  .field
+    = f.label :life_beneficiary_no
+    = f.number_field :life_beneficiary_no
+  .actions
+    = f.submit 'Save'

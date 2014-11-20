@@ -1,0 +1,16 @@
+= form_for [:will, @partner_detail]  do |f|
+
+  .field
+    = question "01140"
+    = f.text_field :phone_no
+  .field
+    = question "01150"
+    = f.select :gender, ["Male", "Female"]
+  .field
+    = question "01160"
+    = f.text_field :dob
+  .field
+    = question "01170"
+    = f.text_field :domicile_country
+  .actions
+    = f.submit 'Save'

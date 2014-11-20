@@ -1,0 +1,49 @@
+%h2.section-sub-heading Please Enter you Personal Details
+%p.section-text The information you provide shall be stored for regulatory compliance purposes and to provide you with the best possible service but it will not be used for marketing purposes or disclosed to third parties without your consent unless pursuant to a legal obligation. 
+%hr
+
+= form_for [:will, @testator_detail]  do |f|
+
+  .field
+    = question "01010"
+
+    = f.check_box :consent
+    = f.label :consent
+
+  [Generic Details Form - hidden subject "Testator"]
+  .large-9
+    = question "01020"
+    = f.label :phone_no, class: "small left"
+    = f.text_field :phone_no
+  .field
+    = question "01030"
+    = f.select :gender, ["Male", "Female"]
+  .field
+    = question "01040"
+    = f.text_field :dob
+  .field
+    = question "01050"
+    = f.text_field :domicile_country
+  .field
+    = question "01060"
+    = f.select :children, ["Yes, my own", "Yes, including my partner's", "No"]
+  .field
+    = question "01070"
+    = f.select :children_age, [['Yes', true], ['No', false]]
+  .field
+    = question "01080"
+    = f.select :planning_marrige, [['Yes', true], ['No', false]]
+  .field
+    = question "01090"
+    = f.select :effective_post_marrige, [['Yes', true], ['No', false]]
+  .field
+    = question "01110"
+    = f.select :effective_post_death_sans_marrige, [['Yes', true], ['No', false]]
+  .field
+    = question "01120"
+    = f.select :tax_responsibility, [['Yes', true], ['No', false]]
+  .field
+    = question "01130"
+    = f.select :mirror_will, ["Yes", "No", "Not Applicable"]
+  .actions
+    = f.submit 'Save', class: "button radius"

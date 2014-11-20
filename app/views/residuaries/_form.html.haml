@@ -1,0 +1,7 @@
+= form_for [:will, @residuary] do |f|
+
+  .field
+    = f.label :amount_allowed_to_distribute
+    = f.text_field :amount_allowed_to_distribute
+  .actions
+    = f.submit 'Save'

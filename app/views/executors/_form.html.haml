@@ -1,0 +1,31 @@
+= form_for [:will, @executor] do |f|
+
+  .field
+    = question "03010"
+    = f.check_box :notary_express
+  .field
+    = question "03020"
+    = f.check_box :first
+  .field
+    = question "03030"
+    = f.check_box :second
+  .field
+    = question "03040"
+    = f.check_box :third
+  .field
+    = question "03050"
+    = f.check_box :forth
+  .field
+    = question "03060"
+    = f.check_box :replacement_first
+  .field
+    = question "03070"
+    = f.check_box :replacement_second
+  .field
+    = question "03080"
+    = f.check_box :replacement_third
+  .field
+    = question "03090"
+    = f.check_box :replacement_forth
+  .actions
+    = f.submit 'Save'

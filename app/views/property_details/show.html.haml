@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Will:
+  = @property_detail.will
+%p
+  %b Land reg number:
+  = @property_detail.land_reg_number
+%p
+  %b Address one:
+  = @property_detail.address_one
+%p
+  %b Address two:
+  = @property_detail.address_two
+%p
+  %b City:
+  = @property_detail.city
+%p
+  %b County:
+  = @property_detail.county
+%p
+  %b Country:
+  = @property_detail.country
+%p
+  %b Postcode:
+  = @property_detail.postcode
+
+= link_to 'Edit', edit_property_detail_path(@property_detail)
+\|
+= link_to 'Back', property_details_path

@@ -1,0 +1,10 @@
+= form_for [:will, @request] do |f|
+
+  .field
+    = f.label :requests
+    = f.text_field :requests
+  .field
+    = f.label :specific
+    = f.text_area :specific
+  .actions
+    = f.submit 'Save'
