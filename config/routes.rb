@@ -13,13 +13,20 @@ Rails.application.routes.draw do
     resources :executors, only: [:new, :edit, :create, :update]
     resources :administrations, only: [:new, :edit, :create, :update]
     resources :guardians, only: [:new, :edit, :create, :update]
-    resources :cash_gifts, only: [:new, :edit, :create, :update]
-    resources :charitable_donations, only: [:new, :edit, :create, :update]
-    resources :properties, only: [:new, :edit, :create, :update]
-    resources :personal_gifts, only: [:new, :edit, :create, :update]
-    resources :residuaries, only: [:new, :edit, :create, :update] do
-      resources :residuary_details, only: [:new, :edit, :create, :update]
+    resources :cash_gifts, only: [:new, :edit, :create, :update] do
+      collection { get :option }
     end
+    resources :charitable_donations, only: [:new, :edit, :create, :update] do
+      collection { get :option }
+    end
+    resources :properties, only: [:new, :edit, :create, :update] do
+      collection { get :option }
+    end
+    resources :personal_gifts, only: [:new, :edit, :create, :update] do
+      collection { get :option }
+    end
+    resources :residuaries, only: [:new, :edit, :create, :update]
+    resources :residuary_details, only: [:new, :edit, :create, :update]
     resources :requests, only: [:new, :edit, :create, :update]
   end
 

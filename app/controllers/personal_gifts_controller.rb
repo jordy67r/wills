@@ -2,6 +2,7 @@ class PersonalGiftsController < ApplicationController
   before_action :set_personal_gift, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @personal_gift = PersonalGift.new
   end
 
@@ -10,9 +11,14 @@ class PersonalGiftsController < ApplicationController
 
   def create
     @personal_gift = PersonalGift.new(personal_gift_params)
-
+    @personal_gift.will_id = params[:will_id]
     if @personal_gift.save
-      redirect_to new_will_residuary_path
+      if params[:commit] == "Add Another"
+        redirect_to new_will_personal_gift_path
+      elsif params[:commit] == "Proceed"
+        @will = Will.find(params[:will_id])
+        redirect_to new_will_residuary_detail_path
+      end
     else
       render :new
     end

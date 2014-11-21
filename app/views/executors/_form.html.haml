@@ -1,4 +1,7 @@
-= form_for [:will, @executor] do |f|
+%p.section-text You should specify who you wish to administer your estate and carry out your wishes in your will. It s advisable to have more than one executor but less than four. You can have professional executors and Notary Express can act in this capacity.
+%hr
+
+= form_for [@will, @executor] do |f|
 
   .field
     = question "03010"
@@ -27,5 +30,4 @@
   .field
     = question "03090"
     = f.check_box :replacement_forth
-  .actions
-    = f.submit 'Save'
+  = f.submit 'Save', class: "button radius"

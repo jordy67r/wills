@@ -2,6 +2,7 @@ class FuneralsController < ApplicationController
   before_action :set_funeral, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @funeral = Funeral.new
   end
 
@@ -9,8 +10,14 @@ class FuneralsController < ApplicationController
   end
 
   def create
-    @funeral = Funeral.new(funeral_params)
-
+    @will = Will.find(params[:will_id])
+    if @will.funeral
+      @funeral = @will.funeral
+      @funeral.update(funeral_params)
+    else
+      @funeral = Funeral.new(funeral_params)
+      @funeral.will_id = params[:will_id]
+    end
     if @funeral.save
       redirect_to new_will_executor_path, notice: 'Funeral was successfully created.'
     else

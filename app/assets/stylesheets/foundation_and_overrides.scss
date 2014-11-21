@@ -47,7 +47,7 @@ $row-width: rem-calc(1200);
 // We use these to control various global styles
 // $body-bg: #fff;
 // $body-font-color: #222;
-// $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+$body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $body-font-weight: $font-weight-normal;
 // $body-font-style: normal;
 
@@ -60,7 +60,7 @@ $row-width: rem-calc(1200);
 // $default-float: left;
 
 // We use these as default colors throughout
-// $primary-color: #008CBA;
+$primary-color: #f00;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -1298,3 +1298,13 @@ $row-width: rem-calc(1200);
 // $range-slider-handle-cursor: pointer;
 
 @import 'foundation';
+
+.prefix label { line-height: 2rem; }
+.check-box-question label {
+  line-height: 2rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  min-height: 2.3rem;
+  padding-left: 1rem;
+  font-weight: bold;
+}

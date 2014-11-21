@@ -2,6 +2,7 @@ class AdministrationsController < ApplicationController
   before_action :set_administration, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @administration = Administration.new
   end
 
@@ -9,8 +10,14 @@ class AdministrationsController < ApplicationController
   end
 
   def create
-    @administration = Administration.new(administration_params)
-
+    @will = Will.find(params[:will_id])
+    if @will.administration
+      @administration = @will.administration
+      @administration.update(administration_params)
+    else
+      @administration = Administration.new(administration_params)
+      @administration.will_id = params[:will_id]
+    end
     if @administration.save
       redirect_to new_will_guardian_path
     else

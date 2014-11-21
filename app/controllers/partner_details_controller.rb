@@ -2,6 +2,7 @@ class PartnerDetailsController < ApplicationController
   before_action :set_partner_detail, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @partner_detail = PartnerDetail.new
   end
 
@@ -9,8 +10,14 @@ class PartnerDetailsController < ApplicationController
   end
 
   def create
-    @partner_detail = PartnerDetail.new(partner_detail_params)
-
+    @will = Will.find(params[:will_id])
+    if @will.partner_detail
+      @partner_detail = @will.partner_detail
+      @partner_detail.update(partner_detail_params)
+    else
+      @partner_detail = PartnerDetail.new(partner_detail_params)
+      @partner_detail.will_id = params[:will_id]
+    end
     if @partner_detail.save
       redirect_to new_will_funeral_path
     else

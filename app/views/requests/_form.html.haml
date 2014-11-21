@@ -1,10 +1,5 @@
 = form_for [:will, @request] do |f|
 
-  .field
-    = f.label :requests
-    = f.text_field :requests
-  .field
-    = f.label :specific
-    = f.text_area :specific
-  .actions
-    = f.submit 'Save'
+  = render "layouts/check_box", :f => f, check_box: :requests, q_no: "11010"
+  = render "layouts/text_area", :f => f, text_area: :specific, q_no: "11020"
+  = f.submit 'Save', class: "button radius"

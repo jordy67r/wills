@@ -1,19 +1,12 @@
-= form_for [:will, @cash_gift] do |f|
 
-  .field
-    = f.label :shared_to
-    = f.text_field :shared_to
-  .field
-    = f.label :amount
-    = f.text_field :amount
-  .field
-    = f.label :certain_age
-    = f.text_field :certain_age
-  .field
-    = f.label :if_dead
-    = f.text_field :if_dead
-  .field
-    = f.label :certain_age_if_dead
-    = f.text_field :certain_age_if_dead
-  .actions
-    = f.submit 'Save'
+%h2.section-sub-heading You can make specific gifts of money.
+%hr
+= form_for [@will, @cash_gift] do |f|
+
+  = render "layouts/select_list", :f => f, select_list: :shared_to, q_no: "06020", options: ["No" , "All of my children" , "All of my grandchildren"]
+  = render "layouts/text_field", :f => f, text_field: :amount, q_no: "06030"
+  = render "layouts/select_list", :f => f, select_list: :certain_age, q_no: "06040", options: ["no"] + (16..40).to_a.map {|i| i.to_s}
+  = render "layouts/select_list", :f => f, select_list: :if_dead, q_no: "06050", options: ["Put back into your estate", "Allocated to their child(ren)"]
+  = render "layouts/select_list", :f => f, select_list: :certain_age_if_dead, q_no: "06060", options: ["no"] + (16..40).to_a.map {|i| i.to_s}
+  = f.submit 'Add Another', class: "button radius"
+  = f.submit 'Proceed', class: "button radius"

@@ -2,7 +2,7 @@ class CreateRequests < ActiveRecord::Migration
   def change
     create_table :requests do |t|
       t.belongs_to :will, index: true
-      t.string :requests
+      t.boolean :requests
       t.text :specific
 
       t.timestamps

@@ -1,0 +1,9 @@
+%h1 Cash Gifts
+%h2.section-sub-heading You can make specific gifts of money.
+%hr
+%dl
+  %dt
+    = question "06010"
+
+= link_to("No", option_will_charitable_donations_path(@will))
+= link_to("Yes", new_will_cash_gift_path)

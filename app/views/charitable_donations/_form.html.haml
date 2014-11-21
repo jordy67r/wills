@@ -1,16 +1,13 @@
-= form_for [:will, @charitable_donation] do |f|
+%h2.section-sub-heading You can make cash gifts to charities.
+%hr
+= form_for [@will, @charitable_donation] do |f|
 
   .field
     = f.label :charity_id
     = f.number_field :charity_id
-  .field
-    = f.label :amount
-    = f.text_field :amount
-  .field
-    = f.label :instruction
-    = f.text_area :instruction
-  .field
-    = f.label :allow_alternate
-    = f.check_box :allow_alternate
-  .actions
-    = f.submit 'Save'
+  = render "layouts/text_field", :f => f, text_field: :amount, q_no: "07040"
+  = render "layouts/text_area", :f => f, text_area: :instruction, q_no: "07050"
+  = render "layouts/check_box", :f => f, check_box: :allow_alternate, q_no: "07070"
+  = f.submit 'Add Another', class: "button radius"
+  = f.submit 'Proceed', class: "button radius"
+

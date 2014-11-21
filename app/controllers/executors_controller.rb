@@ -2,6 +2,7 @@ class ExecutorsController < ApplicationController
   before_action :set_executor, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @executor = Executor.new
   end
 
@@ -9,10 +10,20 @@ class ExecutorsController < ApplicationController
   end
 
   def create
-    @executor = Executor.new(executor_params)
-
+    @will = Will.find(params[:will_id])
+    if @will.executor
+      @executor = @will.executor
+      @executor.update(executor_params)
+    else
+      @executor = Executor.new(executor_params)
+      @executor.will_id = params[:will_id]
+    end
     if @executor.save
-      redirect_to new_will_administration_path
+      if @executor.notary_express
+        redirect_to new_will_guardian_path
+      else
+        redirect_to new_will_administration_path
+      end
     else
       render :new
     end

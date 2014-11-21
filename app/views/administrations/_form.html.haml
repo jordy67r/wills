@@ -1,22 +1,12 @@
-= form_for [:will, @administration] do |f|
+%p.section-text Your executors or personal representatives distribute your estate and give effect to the wishes in your will subject to the law and any express guidelines in your will. In order to facilitate the administration of your estate it is advisable to give these individuals certain express powers in addition to their powers under the law. These powers will be automatically included in your will unless you expressly state otherwise.
+%hr
 
-  .field
-    = question "04010"
-    = f.select :accept_admin, [['Yes', true], ['No', false]]
-  .field
-    = question "04020"
-    = f.check_box :expanded_powers
-  .field
-    = question "04030"
-    = f.check_box :borrow_powers
-  .field
-    = question "04040"
-    = f.check_box :appoint_admin_powers
-  .field
-    = question "04050"
-    = f.check_box :buy_sell_powers
-  .field
-    = question "04060"
-    = f.check_box :liability_powers
-  .actions
-    = f.submit 'Save'
+= form_for [@will, @administration] do |f|
+
+  = render "layouts/select_list", :f => f, select_list: :accept_admin, q_no: "04010", options: [['Yes', true], ['No', false]]
+  = render "layouts/check_box", :f => f, check_box: :expanded_powers, q_no: "04020"
+  = render "layouts/check_box", :f => f, check_box: :borrow_powers, q_no: "04030"
+  = render "layouts/check_box", :f => f, check_box: :appoint_admin_powers, q_no: "04040"
+  = render "layouts/check_box", :f => f, check_box: :buy_sell_powers, q_no: "04050"
+  = render "layouts/check_box", :f => f, check_box: :liability_powers, q_no: "04060"
+  = f.submit 'Save', class: "button radius"

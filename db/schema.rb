@@ -214,7 +214,7 @@ ActiveRecord::Schema.define(version: 20141119154433) do
   add_index "residuaries", ["will_id"], name: "index_residuaries_on_will_id", using: :btree
 
   create_table "residuary_details", force: true do |t|
-    t.integer  "residuary_id"
+    t.integer  "will_id"
     t.string   "share"
     t.string   "certain_age"
     t.string   "if_dead"
@@ -224,7 +224,7 @@ ActiveRecord::Schema.define(version: 20141119154433) do
     t.datetime "updated_at"
   end
 
-  add_index "residuary_details", ["residuary_id"], name: "index_residuary_details_on_residuary_id", using: :btree
+  add_index "residuary_details", ["will_id"], name: "index_residuary_details_on_will_id", using: :btree
 
   create_table "testator_details", force: true do |t|
     t.integer  "will_id"

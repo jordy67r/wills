@@ -2,6 +2,7 @@ class ResiduariesController < ApplicationController
   before_action :set_residuary, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @residuary = Residuary.new
   end
 
@@ -9,8 +10,14 @@ class ResiduariesController < ApplicationController
   end
 
   def create
-    @residuary = Residuary.new(residuary_params)
-
+    @will = Will.find(params[:will_id])
+    if @will.residuary
+      @residuary = @will.residuary
+      @residuary.update(residuary_params)
+    else
+      @residuary = Residuary.new(residuary_params)
+      @residuary.will_id = params[:will_id]
+    end
     if @residuary.save
       redirect_to new_will_request_path
     else

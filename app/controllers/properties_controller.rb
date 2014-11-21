@@ -2,6 +2,7 @@ class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @property = Property.new
   end
 
@@ -10,9 +11,14 @@ class PropertiesController < ApplicationController
 
   def create
     @property = Property.new(property_params)
-
+    @property.will_id = params[:will_id]
     if @property.save
-      redirect_to new_will_personal_gift_path
+      if params[:commit] == "Add Another"
+        redirect_to new_will_property_path
+      elsif params[:commit] == "Proceed"
+        @will = Will.find(params[:will_id])
+        redirect_to option_will_personal_gifts_path(@will)
+      end
     else
       render :new
     end
@@ -24,6 +30,10 @@ class PropertiesController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def option
+    @will = Will.find(params[:will_id])
   end
 
   private

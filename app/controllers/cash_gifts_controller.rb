@@ -2,6 +2,7 @@ class CashGiftsController < ApplicationController
   before_action :set_cash_gift, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @cash_gift = CashGift.new
   end
 
@@ -10,12 +11,21 @@ class CashGiftsController < ApplicationController
 
   def create
     @cash_gift = CashGift.new(cash_gift_params)
-
+    @cash_gift.will_id = params[:will_id]
     if @cash_gift.save
-      redirect_to new_will_charitable_donation_path
+      if params[:commit] == "Add Another"
+        redirect_to new_will_cash_gift_path
+      elsif params[:commit] == "Proceed"
+        @will = Will.find(params[:will_id])
+        redirect_to option_will_charitable_donations_path(@will)
+      end
     else
       render :new
     end
+  end
+
+  def option
+    @will = Will.find(params[:will_id])
   end
 
   def update

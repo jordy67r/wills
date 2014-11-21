@@ -2,6 +2,7 @@ class CharitableDonationsController < ApplicationController
   before_action :set_charitable_donation, only: [:show, :edit, :update, :destroy]
 
   def new
+    @will = Will.find(params[:will_id])
     @charitable_donation = CharitableDonation.new
   end
 
@@ -10,9 +11,14 @@ class CharitableDonationsController < ApplicationController
 
   def create
     @charitable_donation = CharitableDonation.new(charitable_donation_params)
-
+    @charitable_donation.will_id = params[:will_id]
     if @charitable_donation.save
-      redirect_to new_will_property_path
+      if params[:commit] == "Add Another"
+        redirect_to new_will_charitable_donation_path
+      elsif params[:commit] == "Proceed"
+        @will = Will.find(params[:will_id])
+        redirect_to option_will_properties_path(@will)
+      end
     else
       render :new
     end
@@ -24,6 +30,10 @@ class CharitableDonationsController < ApplicationController
     else
       render :edit
     end
+  end
+
+  def option
+    @will = Will.find(params[:will_id])
   end
 
   private

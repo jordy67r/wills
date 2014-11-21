@@ -1,10 +1,7 @@
-= form_for [:will, @personal_gift] do |f|
+%p.section-text You can make specific gifts of personal items.
+= form_for [@will, @personal_gift] do |f|
 
-  .field
-    = f.label :description
-    = f.text_area :description
-  .field
-    = f.label :as_cash_if_sold
-    = f.check_box :as_cash_if_sold
-  .actions
-    = f.submit 'Save'
+  = render "layouts/text_area", :f => f, text_area: :description, q_no: "09020"
+  = render "layouts/select_list", :f => f, select_list: :as_cash_if_sold, q_no: "09030", options: [['Yes', true], ['No', false]]
+  = f.submit 'Add Another', class: "button radius"
+  = f.submit 'Proceed', class: "button radius"
