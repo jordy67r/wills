@@ -196,7 +196,7 @@ ActiveRecord::Schema.define(version: 20141119154433) do
 
   create_table "requests", force: true do |t|
     t.integer  "will_id"
-    t.string   "requests"
+    t.boolean  "requests"
     t.text     "specific"
     t.datetime "created_at"
     t.datetime "updated_at"
