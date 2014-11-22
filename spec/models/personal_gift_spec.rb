@@ -9,7 +9,6 @@ describe PersonalGift do
   end
 
   it "should validate description correctly" do
-    FactoryGirl.build(:personal_gift, description: "").should_not be_valid
     FactoryGirl.build(:personal_gift, description: "a" * 1001).should_not be_valid
   end
 

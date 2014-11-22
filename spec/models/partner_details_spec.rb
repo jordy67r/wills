@@ -9,7 +9,11 @@ describe PartnerDetail do
   end
 
   it "should validate phone number correctly" do
-    FactoryGirl.build(:partner_detail, phone_no: "").should_not be_valid
     FactoryGirl.build(:partner_detail, phone_no: "1" * 21).should_not be_valid
   end
+
+  it "should have valid date format" do
+    pending "make the date format thign"
+  end
+  
 end

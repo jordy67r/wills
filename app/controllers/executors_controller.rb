@@ -19,8 +19,8 @@ class ExecutorsController < ApplicationController
       @executor.will_id = params[:will_id]
     end
     if @executor.save
-      if @executor.notary_express
-        redirect_to new_will_guardian_path
+      if @executor.first
+        redirect_to will_executor_first_executor_path(@will, @executor)
       else
         redirect_to new_will_administration_path
       end
@@ -30,12 +30,67 @@ class ExecutorsController < ApplicationController
   end
 
   def update
+    @will = Will.find(params[:will_id])
     if @executor.update(executor_params)
-      redirect_to @executor, notice: 'Executor was successfully updated.'
+      if params[:commit] == "Proceed"
+        redirect_to new_will_administration_path
+      else
+        if @executor.replacement_forth && @executor.replacement_third && @executor.replacement_second && @executor.replacement_first
+          redirect_to will_executor_forth_replacement_executor_path(@will, @executor)
+        elsif @executor.replacement_third && @executor.replacement_second && @executor.replacement_first
+          redirect_to will_executor_third_replacement_executor_path(@will, @executor)
+        elsif @executor.replacement_second && @executor.replacement_first
+          redirect_to will_executor_second_replacement_executor_path(@will, @executor)
+        elsif @executor.replacement_first
+          redirect_to will_executor_first_replacement_executor_path(@will, @executor)
+        elsif @executor.forth && @executor.third && @executor.second && @executor.first
+          redirect_to will_executor_forth_executor_path(@will, @executor)
+        elsif @executor.third && @executor.second && @executor.first
+          redirect_to will_executor_third_executor_path(@will, @executor)
+        elsif @executor.second && @executor.first
+          redirect_to will_executor_second_executor_path(@will, @executor)
+        else
+          redirect_to will_executor_first_replacement_executor_path(@will, @executor)
+        end
+      end
     else
       render :edit
     end
   end
+
+  def first_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+  def second_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+  def third_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+  def forth_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+  def first_replacement_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+  def second_replacement_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+  def third_replacement_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+  def forth_replacement_executor
+    @will = Will.find(params[:will_id])
+    @executor = Executor.find(params[:executor_id])
+  end
+
 
   private
     def set_executor

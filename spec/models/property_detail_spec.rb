@@ -9,7 +9,6 @@ describe PropertyDetail do
   end
 
   it "should validate land registry number" do
-    FactoryGirl.build(:property_detail,land_reg_number: "").should_not be_valid
     FactoryGirl.build(:property_detail,land_reg_number: "1" * 21).should_not be_valid
   end
 
@@ -24,7 +23,6 @@ describe PropertyDetail do
   end
 
   it "should validate address two" do
-    FactoryGirl.build(:property_detail,address_two: "").should_not be_valid
     FactoryGirl.build(:property_detail,address_two: "a" * 101).should_not be_valid
   end
 

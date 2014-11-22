@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141119154433) do
+ActiveRecord::Schema.define(version: 20141122121218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,8 +114,12 @@ ActiveRecord::Schema.define(version: 20141119154433) do
     t.string   "country"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "testator_detail_id"
+    t.integer  "partner_detail_id"
   end
 
+  add_index "general_details", ["partner_detail_id"], name: "index_general_details_on_partner_detail_id", using: :btree
+  add_index "general_details", ["testator_detail_id"], name: "index_general_details_on_testator_detail_id", using: :btree
   add_index "general_details", ["will_id"], name: "index_general_details_on_will_id", using: :btree
 
   create_table "guardians", force: true do |t|
@@ -245,6 +249,16 @@ ActiveRecord::Schema.define(version: 20141119154433) do
   end
 
   add_index "testator_details", ["will_id"], name: "index_testator_details_on_will_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "password_digest"
+    t.string   "remember_token"
+    t.boolean  "admin"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "wills", force: true do |t|
     t.string   "title"

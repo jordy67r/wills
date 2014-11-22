@@ -34,7 +34,6 @@ describe GeneralDetail do
   end
 
   it "should validate address two" do
-    FactoryGirl.build(:general_detail,address_two: "").should_not be_valid
     FactoryGirl.build(:general_detail,address_two: "a" * 101).should_not be_valid
   end
 

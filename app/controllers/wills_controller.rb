@@ -1,5 +1,6 @@
 class WillsController < ApplicationController
   before_action :set_will, only: [:show, :edit, :update, :destroy]
+  before_action :signed_in_user
 
   def index
     @wills = Will.all
@@ -17,8 +18,8 @@ class WillsController < ApplicationController
   end
 
   def create
-    @will = Will.new(will_params)
-
+    @user = current_user
+    @will = @user.wills.build(title: params[:will][:title])
     if @will.save
       redirect_to new_will_testator_detail_path(@will), notice: 'Will was successfully created.'
     else
@@ -45,6 +46,13 @@ class WillsController < ApplicationController
     end
 
     def will_params
-      params.require(:will).permit(:title, :user_id)
+      params.require(:will).permit(:title)
+    end
+
+    def signed_in_user
+      unless signed_in?
+        store_location
+        redirect_to signin_url, notice: "Please sign in."
+      end
     end
 end

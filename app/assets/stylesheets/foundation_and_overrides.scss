@@ -60,7 +60,7 @@ $body-font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
 // $default-float: left;
 
 // We use these as default colors throughout
-$primary-color: #f00;
+$primary-color: #9b59b6;
 // $secondary-color: #e7e7e7;
 // $alert-color: #f04124;
 // $success-color: #43AC6A;
@@ -1307,4 +1307,9 @@ $primary-color: #f00;
   min-height: 2.3rem;
   padding-left: 1rem;
   font-weight: bold;
+}
+.field_with_errors {
+  label {
+    color: $alert-color;
+  }
 }

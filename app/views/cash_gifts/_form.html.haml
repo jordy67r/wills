@@ -4,7 +4,7 @@
 = form_for [@will, @cash_gift] do |f|
 
   = render "layouts/select_list", :f => f, select_list: :shared_to, q_no: "06020", options: ["No" , "All of my children" , "All of my grandchildren"]
-  = render "layouts/text_field", :f => f, text_field: :amount, q_no: "06030"
+  = render "layouts/text_field", :f => f, text_field: :amount, q_no: "06030", origin: @cash_gift
   = render "layouts/select_list", :f => f, select_list: :certain_age, q_no: "06040", options: ["no"] + (16..40).to_a.map {|i| i.to_s}
   = render "layouts/select_list", :f => f, select_list: :if_dead, q_no: "06050", options: ["Put back into your estate", "Allocated to their child(ren)"]
   = render "layouts/select_list", :f => f, select_list: :certain_age_if_dead, q_no: "06060", options: ["no"] + (16..40).to_a.map {|i| i.to_s}

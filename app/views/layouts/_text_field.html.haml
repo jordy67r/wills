@@ -7,4 +7,8 @@
     %span.prefix
       = f.label text_field
   .large-10.columns
-    = f.text_field text_field
+    - if origin.errors[text_field] && origin.errors[text_field].join(",") != ""
+      = f.text_field text_field, class: "error"
+      %small.error= "#{text_field.to_s.titleize} #{origin.errors[text_field].join(",")}"
+    - else
+      = f.text_field text_field

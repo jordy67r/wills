@@ -4,6 +4,7 @@ class PartnerDetailsController < ApplicationController
   def new
     @will = Will.find(params[:will_id])
     @partner_detail = PartnerDetail.new
+    @general_detail = @partner_detail.general_detail || @partner_detail.build_general_detail
   end
 
   def edit
@@ -16,7 +17,7 @@ class PartnerDetailsController < ApplicationController
       @partner_detail.update(partner_detail_params)
     else
       @partner_detail = PartnerDetail.new(partner_detail_params)
-      @partner_detail.will_id = params[:will_id]
+      @partner_detail.will_id = @will.id
     end
     if @partner_detail.save
       redirect_to new_will_funeral_path
@@ -26,6 +27,7 @@ class PartnerDetailsController < ApplicationController
   end
 
   def update
+    @will = Will.find(params[:will_id])
     if @partner_detail.update(partner_detail_params)
       redirect_to @partner_detail, notice: 'Partner detail was successfully updated.'
     else
@@ -39,6 +41,6 @@ class PartnerDetailsController < ApplicationController
     end
 
     def partner_detail_params
-      params.require(:partner_detail).permit(:phone_no, :gender, :dob, :domicile_country)
+      params.require(:partner_detail).permit(:phone_no, :gender, :dob, :domicile_country, general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country])
     end
 end

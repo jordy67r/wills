@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
 
-
   resources :property_details
 
   resources :charity_details
@@ -10,9 +9,32 @@ Rails.application.routes.draw do
     resources :testator_details, only: [:new, :edit, :create, :update]
     resources :partner_details, only: [:new, :edit, :create, :update]
     resources :funerals, only: [:new, :edit, :create, :update]
-    resources :executors, only: [:new, :edit, :create, :update]
+    resources :executors, only: [:new, :edit, :create, :update] do
+
+        get :first_executor
+        get :second_executor
+        get :third_executor
+        get :forth_executor
+        get :first_replacement_executor
+        get :second_replacement_executor
+        get :third_replacement_executor
+        get :forth_replacement_executor
+
+    end
     resources :administrations, only: [:new, :edit, :create, :update]
-    resources :guardians, only: [:new, :edit, :create, :update]
+    resources :guardians, only: [:new, :edit, :create, :update] do
+      collection do 
+        get :option
+        get :first_guardian
+        get :second_guardian
+        get :third_guardian
+        get :forth_guardian
+        get :first_replacement_guardian
+        get :second_replacement_guardian
+        get :third_replacement_guardian
+        get :forth_replacement_guardian
+      end
+    end
     resources :cash_gifts, only: [:new, :edit, :create, :update] do
       collection { get :option }
     end
@@ -32,6 +54,13 @@ Rails.application.routes.draw do
 
   resources :general_details, only: [:new, :edit, :create, :update]
   resources :questions
+
+  resources :users
+  resources :sessions, only: [:new, :create, :destroy]
+
+  match '/signup', to: 'users#new', via: 'get'
+  match '/signin', to: 'sessions#new', via: 'get'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
 
   root 'static_pages#home'
 

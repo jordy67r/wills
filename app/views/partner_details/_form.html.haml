@@ -2,10 +2,18 @@
 %hr
 = form_for [@will, @partner_detail]  do |f|
 
-  [generic Deets form]
-  - unless @will.testator_detail.mirror_will == "No" || @will.testator_detail.mirror_will == "Not Applicable"
-    = render "layouts/text_field", :f => f, text_field: :phone_no, q_no: "01140"
-    = render "layouts/select_list", :f => f, select_list: :gender, q_no: "01150", options: ["Male", "Female"]
-    = render "layouts/text_field", :f => f, text_field: :dob, q_no: "01160"
-    = render "layouts/text_field", :f => f, text_field: :domicile_country, q_no: "01170"
+  
+  - if @will.testator_detail.mirror_will == "Yes"
+    = f.fields_for :general_detail do |builder|
+      = render "general_details/general_details_form", :builder => builder, :nested_origin => @partner_detail.general_detail
+    = render "layouts/text_field", :f => f, text_field: :phone_no, q_no: "01140", origin: @partner_detail
+    = render "layouts/select_list", :f => f, select_list: :gender, q_no: "01150", options: ["Male", "Female"], origin: @partner_detail
+    = render "layouts/text_field", :f => f, text_field: :dob, q_no: "01160", origin: @partner_detail
+    = render "layouts/text_field", :f => f, text_field: :domicile_country, q_no: "01170", origin: @partner_detail
     = f.submit 'Save', class: "button radius"
+  - else
+    = f.fields_for :general_detail do |builder|
+      = render "layouts/text_field", :f => builder, text_field: :first_name, q_no: "00020", origin: @partner_detail.general_detail
+      = render "layouts/text_field", :f => builder, text_field: :middle_name, q_no: "00030", origin: @partner_detail.general_detail
+      = render "layouts/text_field", :f => builder, text_field: :surname, q_no: "00040", origin: @partner_detail.general_detail
+      = f.submit 'Save', class: "button radius"

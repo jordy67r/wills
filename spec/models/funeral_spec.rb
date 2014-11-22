@@ -10,12 +10,14 @@ describe Funeral do
 
   it "should validate preferance correctly" do
     FactoryGirl.build(:funeral, preference: "").should_not be_valid
-    FactoryGirl.build(:funeral, preference: "a" * 2001).should_not be_valid
+  end
+
+  it "should validate wishes correctly" do
+    FactoryGirl.build(:funeral, wishes: "a" * 2000).should_not be_valid
   end
 
   it "should validate specific_organs correctly" do
-    FactoryGirl.build(:funeral, specific_organs: "").should_not be_valid
-    FactoryGirl.build(:funeral, specific_organs: "a" * 2001).should_not be_valid
+    FactoryGirl.build(:funeral, specific_organs: "a" * 200).should_not be_valid
   end
 
 end
