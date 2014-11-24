@@ -32,63 +32,89 @@ class ExecutorsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @executor.update(executor_params)
-      if params[:commit] == "Proceed"
-        redirect_to new_will_administration_path
+      if @executor.replacement_forth && params[:executor][:third_replacement_executor_general_detail_attributes]
+        redirect_to will_executor_forth_replacement_executor_path(@will, @executor)
+      elsif @executor.replacement_third && params[:executor][:second_replacement_executor_general_detail_attributes]
+        redirect_to will_executor_third_replacement_executor_path(@will, @executor)
+      elsif @executor.replacement_second && params[:executor][:first_replacement_executor_general_detail_attributes]
+        redirect_to will_executor_second_replacement_executor_path(@will, @executor)
+      elsif params[:executor][:first_replacement_executor_general_detail_attributes] || 
+            params[:executor][:second_replacement_executor_general_detail_attributes] || 
+            params[:executor][:third_replacement_executor_general_detail_attributes] || 
+            params[:executor][:forth_replacement_executor_general_detail_attributes]
+          redirect_to new_will_administration_path
+      elsif @executor.forth && params[:executor][:third_executor_general_detail_attributes]
+        redirect_to will_executor_forth_executor_path(@will, @executor)
+      elsif @executor.third && params[:executor][:second_executor_general_detail_attributes]
+        redirect_to will_executor_third_executor_path(@will, @executor)
+      elsif @executor.second && params[:executor][:first_executor_general_detail_attributes]
+        redirect_to will_executor_second_executor_path(@will, @executor)
       else
-        if @executor.replacement_forth && @executor.replacement_third && @executor.replacement_second && @executor.replacement_first
-          redirect_to will_executor_forth_replacement_executor_path(@will, @executor)
-        elsif @executor.replacement_third && @executor.replacement_second && @executor.replacement_first
-          redirect_to will_executor_third_replacement_executor_path(@will, @executor)
-        elsif @executor.replacement_second && @executor.replacement_first
-          redirect_to will_executor_second_replacement_executor_path(@will, @executor)
-        elsif @executor.replacement_first
-          redirect_to will_executor_first_replacement_executor_path(@will, @executor)
-        elsif @executor.forth && @executor.third && @executor.second && @executor.first
-          redirect_to will_executor_forth_executor_path(@will, @executor)
-        elsif @executor.third && @executor.second && @executor.first
-          redirect_to will_executor_third_executor_path(@will, @executor)
-        elsif @executor.second && @executor.first
-          redirect_to will_executor_second_executor_path(@will, @executor)
-        else
-          redirect_to will_executor_first_replacement_executor_path(@will, @executor)
-        end
+        redirect_to will_executor_first_replacement_executor_path(@will, @executor)
       end
     else
-      render :edit
+      if params[:executor][:forth_replacement_executor_general_detail_attributes]
+        render :forth_replacement_executor
+      elsif params[:executor][:third_replacement_executor_general_detail_attributes]
+        render :third_replacement_executor
+      elsif params[:executor][:second_replacement_executor_general_detail_attributes]
+        render :second_replacement_executor
+      elsif params[:executor][:first_replacement_executor_general_detail_attributes]
+        render :first_replacement_executor
+      elsif params[:executor][:forth_executor_general_detail_attributes]
+        render :forth_executor
+      elsif params[:executor][:third_executor_general_detail_attributes]
+        render :third_executor
+      elsif params[:executor][:second_executor_general_detail_attributes]
+        render :second_executor
+      elsif params[:executor][:first_executor_general_detail_attributes]
+        render :first_executor
+      else
+        render :edit
+      end
     end
   end
 
   def first_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_first_executor_general_detail
   end
   def second_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_second_executor_general_detail
   end
   def third_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_third_executor_general_detail
   end
   def forth_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_forth_executor_general_detail
   end
   def first_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_first_replacement_executor_general_detail
   end
   def second_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_second_replacement_executor_general_detail
   end
   def third_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_third_replacement_executor_general_detail
   end
   def forth_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
+    @executor.build_forth_replacement_executor_general_detail
+    @origin
   end
 
 
@@ -98,6 +124,14 @@ class ExecutorsController < ApplicationController
     end
 
     def executor_params
-      params.require(:executor).permit(:notary_express, :first, :second, :third, :forth, :replacement_first, :replacement_second, :replacement_third, :replacement_forth)
+      params.require(:executor).permit(:notary_express, :first, :second, :third, :forth, :replacement_first, :replacement_second, :replacement_third, :replacement_forth, 
+        forth_replacement_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country],
+        third_replacement_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country],
+        second_replacement_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country],
+        first_replacement_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country],
+        forth_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country],
+        third_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country],
+        second_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country],
+        first_executor_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country])
     end
 end

@@ -4,11 +4,7 @@
 
 = form_for [@will, @executor] do |f|
 
-  .field
-    = question "03010"
-    = f.check_box :notary_express
-  .field
-    = question "03020"
-    = f.check_box :first
+  = render "layouts/check_box", :f => f, check_box: :notary_express, q_no: "03010"
+  = render "layouts/check_box", :f => f, check_box: :first, q_no: "03020"
 
   = f.submit 'Save', class: "button radius"

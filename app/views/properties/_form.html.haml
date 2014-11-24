@@ -2,6 +2,13 @@
 %hr
 = form_for [@will, @property] do |f|
 
+  = render "layouts/text_field", :f => f, text_field: :land_reg_number, q_no: "00110", origin: @property
+  = render "layouts/text_field", :f => f, text_field: :address_one, q_no: "00050", origin: @property
+  = render "layouts/text_field", :f => f, text_field: :address_two, q_no: "00060", origin: @property
+  = render "layouts/text_field", :f => f, text_field: :city, q_no: "00070", origin: @property
+  = render "layouts/text_field", :f => f, text_field: :county, q_no: "00080", origin: @property
+  = render "layouts/text_field", :f => f, text_field: :postcode, q_no: "00090", origin: @property
+  = render "layouts/text_field", :f => f, text_field: :country, q_no: "00100", origin: @property
   = render "layouts/select_list", :f => f, select_list: :sole_residence, q_no: "08020", options: [['Yes', true], ['No', false]]
   = render "layouts/select_list", :f => f, select_list: :recipient_no, q_no: "08030", options: ["1", "2", "3", "4"]
   = render "layouts/select_list", :f => f, select_list: :recipient_no, q_no: "08040", options: ["Tenants in common", "Joint tenants "]

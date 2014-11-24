@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141122121218) do
+ActiveRecord::Schema.define(version: 20141124090755) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,7 +45,16 @@ ActiveRecord::Schema.define(version: 20141122121218) do
 
   create_table "charitable_donations", force: true do |t|
     t.integer  "will_id"
-    t.integer  "charity_id"
+    t.boolean  "popular_charity"
+    t.string   "popular_charity_name"
+    t.string   "name"
+    t.string   "registered_charity_number"
+    t.string   "address_one"
+    t.string   "address_two"
+    t.string   "city"
+    t.string   "county"
+    t.string   "country"
+    t.string   "postcode"
     t.string   "amount"
     t.text     "instruction"
     t.boolean  "allow_alternate"
@@ -116,6 +125,24 @@ ActiveRecord::Schema.define(version: 20141122121218) do
     t.datetime "updated_at"
     t.integer  "testator_detail_id"
     t.integer  "partner_detail_id"
+    t.integer  "first_executor_id"
+    t.integer  "second_executor_id"
+    t.integer  "third_executor_id"
+    t.integer  "forth_executor_id"
+    t.integer  "first_replacement_executor_id"
+    t.integer  "second_replacement_executor_id"
+    t.integer  "third_replacement_executor_id"
+    t.integer  "forth_replacement_executor_id"
+    t.integer  "first_guardian_id"
+    t.integer  "second_guardian_id"
+    t.integer  "third_guardian_id"
+    t.integer  "forth_guardian_id"
+    t.integer  "first_replacement_guardian_id"
+    t.integer  "second_replacement_guardian_id"
+    t.integer  "third_replacement_guardian_id"
+    t.integer  "forth_replacement_guardian_id"
+    t.integer  "benificiary_id"
+    t.integer  "replacement_benificiary_id"
   end
 
   add_index "general_details", ["partner_detail_id"], name: "index_general_details_on_partner_detail_id", using: :btree
@@ -163,6 +190,13 @@ ActiveRecord::Schema.define(version: 20141122121218) do
 
   create_table "properties", force: true do |t|
     t.integer  "will_id"
+    t.string   "land_reg_number"
+    t.string   "address_one"
+    t.string   "address_two"
+    t.string   "city"
+    t.string   "county"
+    t.string   "country"
+    t.string   "postcode"
     t.boolean  "sole_residence"
     t.integer  "recipient_no"
     t.string   "joint_or_common"
@@ -175,21 +209,6 @@ ActiveRecord::Schema.define(version: 20141122121218) do
   end
 
   add_index "properties", ["will_id"], name: "index_properties_on_will_id", using: :btree
-
-  create_table "property_details", force: true do |t|
-    t.integer  "will_id"
-    t.string   "land_reg_number"
-    t.string   "address_one"
-    t.string   "address_two"
-    t.string   "city"
-    t.string   "county"
-    t.string   "country"
-    t.string   "postcode"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "property_details", ["will_id"], name: "index_property_details_on_will_id", using: :btree
 
   create_table "questions", force: true do |t|
     t.string   "number"

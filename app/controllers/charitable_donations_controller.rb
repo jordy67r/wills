@@ -7,9 +7,11 @@ class CharitableDonationsController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
+    @will = Will.find(params[:will_id])
     @charitable_donation = CharitableDonation.new(charitable_donation_params)
     @charitable_donation.will_id = params[:will_id]
     if @charitable_donation.save
@@ -25,6 +27,7 @@ class CharitableDonationsController < ApplicationController
   end
 
   def update
+    @will = Will.find(params[:will_id])
     if @charitable_donation.update(charitable_donation_params)
       redirect_to @charitable_donation, notice: 'Charitable donation was successfully updated.'
     else
@@ -43,6 +46,6 @@ class CharitableDonationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def charitable_donation_params
-      params.require(:charitable_donation).permit(:charity_id, :amount, :instruction, :allow_alternate)
+      params.require(:charitable_donation).permit(:charity_id, :amount, :instruction, :allow_alternate, :popular_charity, :popular_charity_name, :name, :registered_charity_number, :address_one, :address_two, :city, :county, :country)
     end
 end

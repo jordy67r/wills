@@ -42,6 +42,6 @@ class PropertiesController < ApplicationController
     end
 
     def property_params
-      params.require(:property).permit(:sole_residence, :recipient_no, :joint_or_common, :responsible_for_charges, :as_cash_if_sold, :held_in_trust, :life_beneficiary_no)
+      params.require(:property).permit(:sole_residence, :recipient_no, :joint_or_common, :responsible_for_charges, :as_cash_if_sold, :held_in_trust, :life_beneficiary_no, :will_id, :land_reg_number, :address_one, :address_two, :city, :county, :country, :postcode)
     end
 end

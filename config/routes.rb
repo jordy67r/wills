@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
     resources :administrations, only: [:new, :edit, :create, :update]
     resources :guardians, only: [:new, :edit, :create, :update] do
-      collection do 
+
         get :option
         get :first_guardian
         get :second_guardian
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
         get :second_replacement_guardian
         get :third_replacement_guardian
         get :forth_replacement_guardian
-      end
+
     end
     resources :cash_gifts, only: [:new, :edit, :create, :update] do
       collection { get :option }
