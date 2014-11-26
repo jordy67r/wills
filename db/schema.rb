@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124090755) do
+ActiveRecord::Schema.define(version: 20141125180011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,16 @@ ActiveRecord::Schema.define(version: 20141124090755) do
   create_table "cash_gifts", force: true do |t|
     t.integer  "will_id"
     t.string   "shared_to"
+    t.string   "relationship"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "surname"
+    t.string   "address_one"
+    t.string   "address_two"
+    t.string   "city"
+    t.string   "county"
+    t.string   "postcode"
+    t.string   "country"
     t.string   "amount"
     t.string   "certain_age"
     t.string   "if_dead"
@@ -76,6 +86,7 @@ ActiveRecord::Schema.define(version: 20141124090755) do
     t.string   "postcode"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "charity_residuary_id"
   end
 
   add_index "charity_details", ["will_id"], name: "index_charity_details_on_will_id", using: :btree
@@ -142,7 +153,15 @@ ActiveRecord::Schema.define(version: 20141124090755) do
     t.integer  "third_replacement_guardian_id"
     t.integer  "forth_replacement_guardian_id"
     t.integer  "benificiary_id"
+    t.integer  "second_benificiary_id"
+    t.integer  "third_benificiary_id"
+    t.integer  "forth_benificiary_id"
     t.integer  "replacement_benificiary_id"
+    t.integer  "second_replacement_benificiary_id"
+    t.integer  "third_replacement_benificiary_id"
+    t.integer  "forth_replacement_benificiary_id"
+    t.integer  "individual_residuary_id"
+    t.integer  "charity_residuary_id"
   end
 
   add_index "general_details", ["partner_detail_id"], name: "index_general_details_on_partner_detail_id", using: :btree
@@ -179,6 +198,16 @@ ActiveRecord::Schema.define(version: 20141124090755) do
   add_index "partner_details", ["will_id"], name: "index_partner_details_on_will_id", using: :btree
 
   create_table "personal_gifts", force: true do |t|
+    t.string   "relationship"
+    t.string   "first_name"
+    t.string   "middle_name"
+    t.string   "surname"
+    t.string   "address_one"
+    t.string   "address_two"
+    t.string   "city"
+    t.string   "county"
+    t.string   "postcode"
+    t.string   "country"
     t.integer  "will_id"
     t.text     "description"
     t.boolean  "as_cash_if_sold"
@@ -238,11 +267,11 @@ ActiveRecord::Schema.define(version: 20141124090755) do
 
   create_table "residuary_details", force: true do |t|
     t.integer  "will_id"
+    t.string   "residuary_type"
     t.string   "share"
     t.string   "certain_age"
     t.string   "if_dead"
     t.string   "if_dead_certain_age"
-    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

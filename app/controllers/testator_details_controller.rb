@@ -21,7 +21,7 @@ class TestatorDetailsController < ApplicationController
       @testator_detail.will_id = @will.id
     end
     if @testator_detail.save
-      if @testator_detail.mirror_will == "Yes" || @testator_detail.planning_marrige
+      if @testator_detail.mirror_will == "yes" || @testator_detail.planning_marrige
         redirect_to new_will_partner_detail_path
       else
         redirect_to new_will_funeral_path

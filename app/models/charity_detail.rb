@@ -8,4 +8,5 @@ class CharityDetail < ActiveRecord::Base
   validates :city, presence: true, length: { maximum: 100 }
   validates :county, presence: true, length: { maximum: 100 }
   validates :country, presence: true, length: { maximum: 100 }
+  belongs_to :charity_residuary, class_name: 'ResiduaryDetail'
 end

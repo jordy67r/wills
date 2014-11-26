@@ -10,6 +10,7 @@ class PersonalGiftsController < ApplicationController
   end
 
   def create
+    @will = Will.find(params[:will_id])
     @personal_gift = PersonalGift.new(personal_gift_params)
     @personal_gift.will_id = params[:will_id]
     if @personal_gift.save
@@ -38,6 +39,6 @@ class PersonalGiftsController < ApplicationController
     end
 
     def personal_gift_params
-      params.require(:personal_gift).permit(:description, :as_cash_if_sold)
+      params.require(:personal_gift).permit(:description, :as_cash_if_sold, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country)
     end
 end

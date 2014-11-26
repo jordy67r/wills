@@ -2,16 +2,20 @@
 %hr
 = form_for [@will, @charitable_donation] do |f|
 
-  = render "layouts/check_box", :f => f, check_box: :popular_charity, q_no: "07020"
-  = render "layouts/select_list", :f => f, select_list: :popular_charity_name, q_no: "07030", options: ["No" , "All of my children" , "All of my grandchildren"]
-  = render "layouts/text_field", :f => f, text_field: :name, q_no: "00180", origin: @charitable_donation
-  = render "layouts/text_field", :f => f, text_field: :registered_charity_number, q_no: "00190", origin: @charitable_donation
-  = render "layouts/text_field", :f => f, text_field: :address_one, q_no: "00050", origin: @charitable_donation
-  = render "layouts/text_field", :f => f, text_field: :address_two, q_no: "00060", origin: @charitable_donation
-  = render "layouts/text_field", :f => f, text_field: :city, q_no: "00070", origin: @charitable_donation
-  = render "layouts/text_field", :f => f, text_field: :county, q_no: "00080", origin: @charitable_donation
-  = render "layouts/text_field", :f => f, text_field: :postcode, q_no: "00090", origin: @charitable_donation
-  = render "layouts/text_field", :f => f, text_field: :country, q_no: "00100", origin: @charitable_donation
+  = render "layouts/radio_buttons", :f => f, radio_button: :popular_charity, q_no: "07020", option: {true: "Yes", false: "No"}, selected: 0
+  %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#charitable_donation_popular_charity_true", "data-true" => "show"}
+    = render "layouts/select_list", :f => f, select_list: :popular_charity_name, q_no: "07030", options: ["No" , "All of my children" , "All of my grandchildren"]
+
+  %div{"data-condition" => ":checked", "data-false" => "show", "data-require" => "#charitable_donation_popular_charity_true", "data-true" => "hide"}
+    = render "layouts/text_field", :f => f, text_field: :name, q_no: "00180", origin: @charitable_donation
+    = render "layouts/text_field", :f => f, text_field: :registered_charity_number, q_no: "00190", origin: @charitable_donation
+    = render "layouts/text_field", :f => f, text_field: :address_one, q_no: "00050", origin: @charitable_donation
+    = render "layouts/text_field", :f => f, text_field: :address_two, q_no: "00060", origin: @charitable_donation
+    = render "layouts/text_field", :f => f, text_field: :city, q_no: "00070", origin: @charitable_donation
+    = render "layouts/text_field", :f => f, text_field: :county, q_no: "00080", origin: @charitable_donation
+    = render "layouts/text_field", :f => f, text_field: :postcode, q_no: "00090", origin: @charitable_donation
+    = render "layouts/text_field", :f => f, text_field: :country, q_no: "00100", origin: @charitable_donation
+  
   = render "layouts/text_field", :f => f, text_field: :amount, q_no: "07040", origin: @charitable_donation
   = render "layouts/text_area", :f => f, text_area: :instruction, q_no: "07050"
   = render "layouts/check_box", :f => f, check_box: :allow_alternate, q_no: "07070"

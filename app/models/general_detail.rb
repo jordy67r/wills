@@ -20,7 +20,14 @@ class GeneralDetail < ActiveRecord::Base
   belongs_to :third_replacement_guardian, class_name: 'Guardian'
   belongs_to :forth_replacement_guardian, class_name: 'Guardian'
   belongs_to :benificiary_general_details, class_name: 'Property'
+  belongs_to :second_benificiary_general_details, class_name: 'Property'
+  belongs_to :third_benificiary_general_details, class_name: 'Property'
+  belongs_to :forth_benificiary_general_details, class_name: 'Property'
   belongs_to :replacement_benificiary_general_details, class_name: 'Property'
+  belongs_to :second_replacement_benificiary_general_details, class_name: 'Property'
+  belongs_to :third_replacement_benificiary_general_details, class_name: 'Property'
+  belongs_to :forth_replacement_benificiary_general_details, class_name: 'Property'
+  belongs_to :individual_residuary, class_name: 'ResiduaryDetail'
 
   validates :first_name, presence: true, length: { maximum: 100 }
   validates :middle_name, length: { maximum: 200 }, allow_blank: true
@@ -31,5 +38,13 @@ class GeneralDetail < ActiveRecord::Base
   validates :city, presence: true, length: { maximum: 100 }
   validates :county, presence: true, length: { maximum: 100 }
   validates :country, presence: true, length: { maximum: 100 }
+
+  def full_name
+    self.first_name {+ " " + self.middle_name if middle_name} + " " + self.surname
+  end
+
+  def full_address
+    self.address_one {+ ", " + self.address_two if address_two} + ", " + self.city + ", " + self.county + ", " + self.postcode + ", " + self.country
+  end
 
 end

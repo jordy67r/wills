@@ -9,6 +9,10 @@ class Will < ActiveRecord::Base
   has_one :request
   has_many :cash_gifts
   has_many :charitable_donations
+  has_many :residuary_details
+  has_many :personal_gifts
+  has_many :properties
+  has_one :residuary
   belongs_to :user
 
   has_one :testator_general_details, through: :testator_detail, source: :general_detail
@@ -30,6 +34,6 @@ class Will < ActiveRecord::Base
   has_one :third_replacement_guardian, through: :guardian, source: :third_replacement_guardian_general_detail
   has_one :forth_replacement_guardian, through: :guardian, source: :forth_replacement_guardian_general_detail
 
-
+  validates :title, presence: true
   
 end

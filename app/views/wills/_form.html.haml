@@ -1,16 +1,9 @@
+- provide(:title, "New Will")
 = form_for @will do |f|
-  - if @will.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@will.errors.count, "error")} prohibited this will from being saved:"
-      %ul
-        - @will.errors.full_messages.each do |msg|
-          %li= msg
+
 
   .field
     = f.label :title
     = f.text_field :title
-  .field
-    = f.label :user_id
-    = f.text_field :user_id
   .actions
-    = f.submit 'Save'
+    = f.submit 'Save', class: "button radius"

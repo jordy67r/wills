@@ -1,0 +1,39 @@
+%p.section-text You can donate buildings or land that you own as a tenant in common. If you are not sure by what method you own property you can contact Notary Express to make enquiries on your behalf.
+%hr
+
+= form_for [@will, @property] do |f|
+  %h3 First Beneficiary
+  = f.fields_for :benificiary_general_details do |builder|
+    = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.benificiary_general_details
+  - if @property.recipient_no > 1
+    %h3 Second Beneficiary
+    = f.fields_for :second_benificiary_general_details do |builder|
+      = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.second_benificiary_general_details
+  - if @property.recipient_no > 2
+    %h3 Third Beneficiary
+    = f.fields_for :third_benificiary_general_details do |builder|
+      = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.third_benificiary_general_details
+  - if @property.recipient_no > 3
+    %h4 Forth Beneficiary
+    = f.fields_for :forth_benificiary_general_details do |builder|
+      = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.forth_benificiary_general_details
+  - if @property.held_in_trust  
+    - if @property.life_beneficiary_no > 0
+      %h3 Replacement
+      = f.fields_for :replacement_benificiary_general_details do |builder|
+        = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.replacement_benificiary_general_details
+    - if @property.life_beneficiary_no > 1
+      %h3 2nd Replacement
+      = f.fields_for :second_replacement_benificiary_general_details do |builder|
+        = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.replacement_benificiary_general_details
+    - if @property.life_beneficiary_no > 2
+      %h3 3rd Replacement
+      = f.fields_for :third_replacement_benificiary_general_details do |builder|
+        = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.replacement_benificiary_general_details
+    - if @property.life_beneficiary_no > 3
+      %h3 4th Replacement
+      = f.fields_for :forth_replacement_benificiary_general_details do |builder|
+        = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.replacement_benificiary_general_details
+
+  = f.submit 'Add Another', class: "button radius"
+  = f.submit 'Proceed', class: "button radius"

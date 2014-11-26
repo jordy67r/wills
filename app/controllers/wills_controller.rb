@@ -8,6 +8,46 @@ class WillsController < ApplicationController
 
   def show
     @user = @will.user
+    @testator_details = @will.testator_general_details
+    @testator = @will.testator_detail
+    @partner_details = @will.partner_general_details
+    @funeral = @will.funeral
+    @executor = @will.executor
+    @first_executor = @will.first_executor
+    @second_executor = @will.second_executor
+    @third_executor = @will.third_executor
+    @forth_executor = @will.forth_executor
+    @first_executor_rep = @will.first_replacement_executor
+    @second_executor_rep = @will.second_replacement_executor
+    @third_executor_rep = @will.third_replacement_executor
+    @forth_executor_rep = @will.forth_replacement_executor
+    @exec_reps = [@first_executor_rep , @second_executor_rep , @third_executor_rep , @forth_executor_rep]
+
+    @guardian = @will.guardian
+
+    @first_guardian = @will.first_guardian
+    @second_guardian = @will.second_guardian
+    @third_guardian = @will.third_guardian
+    @forth_guardian = @will.forth_guardian
+    @guardians = [@first_guardian, @second_guardian, @third_guardian, @forth_guardian]
+
+    @first_replacement_guardian = @will.first_replacement_guardian
+    @second_replacement_guardian = @will.second_replacement_guardian
+    @third_replacement_guardian = @will.third_replacement_guardian
+    @forth_replacement_guardian = @will.forth_replacement_guardian
+    @guardians_rep = [@first_replacement_guardian, @second_replacement_guardian, @third_replacement_guardian, @forth_replacement_guardian]
+
+    @personal_gifts = @will.personal_gifts
+
+    @properties = @will.properties
+
+    @cash_gifts = @will.cash_gifts
+
+    @charitable_donations = @will.charitable_donations
+
+    @admin = @will.administration
+
+    @request = @will.request
   end
 
   def new

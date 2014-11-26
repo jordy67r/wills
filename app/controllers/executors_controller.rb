@@ -20,9 +20,15 @@ class ExecutorsController < ApplicationController
     end
     if @executor.save
       if @executor.first
-        redirect_to will_executor_first_executor_path(@will, @executor)
+        unless @executor.notary_express
+          redirect_to will_executor_first_executor_path(@will, @executor)
+        else
+          redirect_to will_executor_second_executor_path(@will, @executor)
+        end
+      elsif @executor.second
+        redirect_to will_executor_second_executor_path(@will, @executor)
       else
-        redirect_to new_will_administration_path
+        redirect_to will_executor_first_replacement_executor_path(@will, @executor)
       end
     else
       render :new
@@ -41,7 +47,8 @@ class ExecutorsController < ApplicationController
       elsif params[:executor][:first_replacement_executor_general_detail_attributes] || 
             params[:executor][:second_replacement_executor_general_detail_attributes] || 
             params[:executor][:third_replacement_executor_general_detail_attributes] || 
-            params[:executor][:forth_replacement_executor_general_detail_attributes]
+            params[:executor][:forth_replacement_executor_general_detail_attributes] ||
+            params[:executor][:replacement_first]
           redirect_to new_will_administration_path
       elsif @executor.forth && params[:executor][:third_executor_general_detail_attributes]
         redirect_to will_executor_forth_executor_path(@will, @executor)

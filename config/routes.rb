@@ -43,12 +43,16 @@ Rails.application.routes.draw do
     end
     resources :properties, only: [:new, :edit, :create, :update] do
       collection { get :option }
+      get :benificiaries
     end
     resources :personal_gifts, only: [:new, :edit, :create, :update] do
       collection { get :option }
     end
     resources :residuaries, only: [:new, :edit, :create, :update]
-    resources :residuary_details, only: [:new, :edit, :create, :update]
+    resources :residuary_details, only: [:new, :edit, :create, :update] do
+        get :charity_benificiary
+        get :people_benificiary 
+    end
     resources :requests, only: [:new, :edit, :create, :update]
   end
 

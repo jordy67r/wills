@@ -21,6 +21,9 @@ function $(selector) {
 		selectorWrapper.innerHTML = selector;
 		elems = selectorWrapper.children
 	} else {
+		selector = selector.replace(/\[([^\[\]]*?(\[[^\]]*\])?[^\[\]]*?)\]/g, function(match, contents, offset, s){
+		return '[' + contents.replace(/([\[\]])/g, '\\$1') + ']';
+		});		
 		elems = document.querySelectorAll(selector);
 	}
 

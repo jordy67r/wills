@@ -41,7 +41,8 @@ class GuardiansController < ApplicationController
       elsif params[:guardian][:forth_replacement_guardian_general_detail_attributes] ||
             params[:guardian][:third_replacement_guardian_general_detail_attributes] ||
             params[:guardian][:second_replacement_guardian_general_detail_attributes] ||
-            params[:guardian][:first_replacement_guardian_general_detail_attributes]
+            params[:guardian][:first_replacement_guardian_general_detail_attributes] ||
+            params[:guardian][:replacement_guardian]
           redirect_to option_will_cash_gifts_path(@will)
       elsif @guardian.forth_guardian && params[:guardian][:third_guardian_general_detail_attributes]
         redirect_to will_guardian_forth_guardian_path(@will, @guardian)

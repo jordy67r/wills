@@ -3,13 +3,15 @@
 = form_for [@will, @partner_detail]  do |f|
 
   
-  - if @will.testator_detail.mirror_will == "Yes"
+  - if @will.testator_detail.mirror_will == "yes"
     = f.fields_for :general_detail do |builder|
+      = render "layouts/text_field", :f => builder, text_field: :relationship, q_no: "00010", origin: @partner_detail.general_detail
       = render "general_details/general_details_form", :builder => builder, :nested_origin => @partner_detail.general_detail
     = render "layouts/text_field", :f => f, text_field: :phone_no, q_no: "01140", origin: @partner_detail
     = render "layouts/select_list", :f => f, select_list: :gender, q_no: "01150", options: ["Male", "Female"], origin: @partner_detail
+    [NEEDS TO BE DATE PICKER]
     = render "layouts/text_field", :f => f, text_field: :dob, q_no: "01160", origin: @partner_detail
-    = render "layouts/text_field", :f => f, text_field: :domicile_country, q_no: "01170", origin: @partner_detail
+    = render "layouts/select_list", :f => f, select_list: :domicile_country, q_no: "01170", options: TestatorDetail::COUNTRIES
     = f.submit 'Save', class: "button radius"
   - else
     = f.fields_for :general_detail do |builder|

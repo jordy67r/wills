@@ -1,7 +1,17 @@
 %p.section-text You can make specific gifts of personal items.
 = form_for [@will, @personal_gift] do |f|
-
+  = render "layouts/text_field", :f => f, text_field: :relationship, q_no: "00010", origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :first_name, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :middle_name, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :surname, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :address_one, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :address_two, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :city, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :county, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :postcode, origin: @personal_gift
+  = render "layouts/text_field", :f => f, text_field: :country, origin: @personal_gift
   = render "layouts/text_area", :f => f, text_area: :description, q_no: "09020"
-  = render "layouts/select_list", :f => f, select_list: :as_cash_if_sold, q_no: "09030", options: [['Yes', true], ['No', false]]
-  = f.submit 'Add Another', class: "button radius"
-  = f.submit 'Proceed', class: "button radius"
+  = render "layouts/radio_buttons", :f => f, radio_button: :as_cash_if_sold, q_no: "09030", option: {true: "Yes", false: "No"}, selected: 0
+  .button-region
+    = f.submit 'Add Another', class: "button radius"
+    = f.submit 'Proceed', class: "button radius"
