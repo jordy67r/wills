@@ -1,7 +1,7 @@
 %h1 Guardian
 %p.section-text You can appoint guardians to look after any children under 18 that you are solely responsible for at the time of your death. If there is more than one guardian and the guardians live separately, the first guardian you name shall have residence of the children.
 %hr
-- if @will.testator_detail.children == "no"
+
   = form_for [@will, @guardian] do |f|
     = render "layouts/radio_buttons", :f => f, radio_button: :appoint_future_guardians, q_no: "05010", option: {true: "Yes", false: "No"}, selected: 1
     .button-region

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127095624) do
+ActiveRecord::Schema.define(version: 20141127150406) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20141127095624) do
     t.boolean  "allow_alternate"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count"
   end
 
   add_index "charitable_donations", ["will_id"], name: "index_charitable_donations_on_will_id", using: :btree
@@ -214,6 +215,7 @@ ActiveRecord::Schema.define(version: 20141127095624) do
     t.boolean  "as_cash_if_sold"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count"
   end
 
   add_index "personal_gifts", ["will_id"], name: "index_personal_gifts_on_will_id", using: :btree
@@ -236,6 +238,7 @@ ActiveRecord::Schema.define(version: 20141127095624) do
     t.integer  "life_beneficiary_no"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count"
   end
 
   add_index "properties", ["will_id"], name: "index_properties_on_will_id", using: :btree
@@ -275,6 +278,7 @@ ActiveRecord::Schema.define(version: 20141127095624) do
     t.string   "if_dead_certain_age"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count"
   end
 
   add_index "residuary_details", ["will_id"], name: "index_residuary_details_on_will_id", using: :btree

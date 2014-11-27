@@ -12,7 +12,7 @@ class CashGiftsController < ApplicationController
 
   def create
     @will = Will.find(params[:will_id])
-    if params[:cash_gift][:count].to_i == @will.cash_gifts.last.count
+    if @will.cash_gifts.last && params[:cash_gift][:count].to_i == @will.cash_gifts.last.count
       @cash_gift = @will.cash_gifts.last
       @cash_gift.update(cash_gift_params)
     else
