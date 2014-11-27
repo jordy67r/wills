@@ -49,7 +49,11 @@ class ExecutorsController < ApplicationController
             params[:executor][:third_replacement_executor_general_detail_attributes] || 
             params[:executor][:forth_replacement_executor_general_detail_attributes] ||
             params[:executor][:replacement_first]
+        if @executor.notary_express
+          redirect_to new_will_guardian_path
+        else
           redirect_to new_will_administration_path
+        end
       elsif @executor.forth && params[:executor][:third_executor_general_detail_attributes]
         redirect_to will_executor_forth_executor_path(@will, @executor)
       elsif @executor.third && params[:executor][:second_executor_general_detail_attributes]

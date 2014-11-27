@@ -11,6 +11,7 @@
   = render "layouts/text_field", :f => f, text_field: :country, origin: @property
   = render "layouts/radio_buttons", :f => f, radio_button: :sole_residence, q_no: "08020", option: {true: "Yes", false: "No"}, selected: 0
   = render "layouts/select_list", :f => f, select_list: :recipient_no, q_no: "08030", options: ["1", "2", "3", "4"]
+  [THIS NEEDS TO HIDE WHEN ! SELECTED ]
   = render "layouts/radio_buttons", :f => f, radio_button: :joint_or_common, q_no: "08040", option: {tenants_in_common: "Tenants in common", joint_tennants: "Joint tenants"}, selected: 1
   = render "layouts/radio_buttons", :f => f, radio_button: :responsible_for_charges, q_no: "08050", option: {true: "Yes", false: "No"}, selected: 0
   = render "layouts/radio_buttons", :f => f, radio_button: :as_cash_if_sold, q_no: "08060", option: {true: "Yes", false: "No"}, selected: 0

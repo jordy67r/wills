@@ -9,8 +9,8 @@
       = render "general_details/general_details_form", :builder => builder, :nested_origin => @partner_detail.general_detail
     = render "layouts/text_field", :f => f, text_field: :phone_no, q_no: "01140", origin: @partner_detail
     = render "layouts/select_list", :f => f, select_list: :gender, q_no: "01150", options: ["Male", "Female"], origin: @partner_detail
-    [NEEDS TO BE DATE PICKER]
-    = render "layouts/text_field", :f => f, text_field: :dob, q_no: "01160", origin: @partner_detail
+    .pikaday
+      = render "layouts/text_field", :f => f, text_field: :dob, q_no: "01160", origin: @partner_detail
     = render "layouts/select_list", :f => f, select_list: :domicile_country, q_no: "01170", options: TestatorDetail::COUNTRIES
     = f.submit 'Save', class: "button radius"
   - else

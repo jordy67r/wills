@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141125180011) do
+ActiveRecord::Schema.define(version: 20141127095624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,7 @@ ActiveRecord::Schema.define(version: 20141125180011) do
     t.string   "certain_age_if_dead"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "count"
   end
 
   add_index "cash_gifts", ["will_id"], name: "index_cash_gifts_on_will_id", using: :btree
