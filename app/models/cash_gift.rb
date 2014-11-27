@@ -15,5 +15,14 @@ class CashGift < ActiveRecord::Base
   def no_children
     true if self.shared_to == "no"
   end
+
+  
+  def full_name
+    self.first_name {+ " " + self.middle_name if middle_name} + " " + self.surname
+  end
+
+  def full_address
+    self.address_one {+ ", " + self.address_two if address_two} + ", " + self.city + ", " + self.county + ", " + self.postcode + ", " + self.country
+  end
   
 end
