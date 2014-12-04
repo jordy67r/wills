@@ -1,0 +1,514 @@
+%table
+  %tr
+    %td
+      %h5 Personal Details
+  %tr
+    %th consent
+    %td= @testator.consent
+  %tr
+    %th phone_no
+    %td= @testator.phone_no
+  %tr  
+    %th gender
+    %td= @testator.gender
+  %tr  
+    %th dob
+    %td= @testator.dob
+  %tr  
+    %th domicile_country
+    %td= @testator.domicile_country
+  %tr  
+    %th children
+    %td= @testator.children
+  %tr  
+    %th children_age
+    %td= @testator.children_age
+  %tr  
+    %th planning_marrige
+    %td= @testator.planning_marrige
+  %tr  
+    %th effective_post_marrige
+    %td= @testator.effective_post_marrige
+  %tr  
+    %th effective_post_death_sans_marrige
+    %td= @testator.effective_post_death_sans_marrige
+  %tr  
+    %th tax_responsibility
+    %td= @testator.tax_responsibility
+  %tr  
+    %th mirror_will
+    %td= @testator.mirror_will
+  %tr  
+    %th first_name
+    %td= @testator_details.first_name
+  %tr  
+    %th middle_name
+    %td= @testator_details.middle_name
+  %tr  
+    %th surname
+    %td= @testator_details.surname
+  %tr  
+    %th address_one
+    %td= @testator_details.address_one
+  %tr  
+    %th address_two
+    %td= @testator_details.address_two
+  %tr  
+    %th city
+    %td= @testator_details.city
+  %tr 
+    %th county
+    %td= @testator_details.county
+  %tr  
+    %th postcode
+    %td= @testator_details.postcode
+  %tr  
+    %th country
+    %td= @testator_details.country
+
+- if @partner
+  - if @testator.mirror_will == "yes" || @testator.planning_marrige
+    %table
+      %tr
+        %td
+          %h5 Mirror Will Details
+      - if @partner_details
+        %tr  
+          %th first_name
+          %td= @partner_details.first_name
+        %tr  
+          %th middle_name
+          %td= @partner_details.middle_name
+        %tr  
+          %th surname
+          %td= @partner_details.surname
+        %tr  
+          %th address_one
+          %td= @partner_details.address_one
+        %tr  
+          %th address_two
+          %td= @partner_details.address_two
+        %tr  
+          %th city
+          %td= @partner_details.city
+        %tr 
+          %th county
+          %td= @partner_details.county
+        %tr  
+          %th postcode
+          %td= @partner_details.postcode
+        %tr  
+          %th country
+          %td= @partner_details.country
+      %tr
+        %th phone_no
+        %td= @partner.phone_no
+      %tr
+        %th gender
+        %td= @partner.gender
+      %tr
+        %th dob
+        %td= @partner.dob
+      %tr
+        %th domicile_country
+        %td= @partner.domicile_country
+
+%table
+  %tr
+    %td
+      %h5 Funeral
+  %tr
+    %th preference
+    %td= @funeral.preference
+  %tr
+    %th wishes
+    %td= @funeral.wishes
+  %tr
+    %th donate_organs
+    %td= @funeral.donate_organs
+  %tr
+    %th specific_organs
+    %td= @funeral.specific_organs
+
+%table
+  %tr
+    %th
+      %h5 Executors
+  %tr
+    %th Notary Express
+    %td= @executor.notary_express
+  - @execs.each_with_index do |exec, i|
+    - if exec
+      %tr
+        %td
+          %h6= "Executor #{i+1}"
+      %tr
+        %th relationship
+        %td= exec.relationship
+      %tr
+        %th first_name
+        %td= exec.first_name
+      %tr
+        %th middle_name
+        %td= exec.middle_name
+      %tr
+        %th surname
+        %td= exec.surname
+      %tr
+        %th address_one
+        %td= exec.address_one
+      %tr
+        %th address_two
+        %td= exec.address_two
+      %tr
+        %th city
+        %td= exec.city
+      %tr
+        %th county
+        %td= exec.county
+      %tr
+        %th postcode
+        %td= exec.postcode
+      %tr
+        %th country
+        %td= exec.country
+  - @exec_reps.each_with_index do |exec, i|
+    - if exec
+      %tr
+        %td
+          %h6= "Replacement Executor #{i+1}"
+      %tr
+        %th relationship
+        %td= exec.relationship
+      %tr
+        %th first_name
+        %td= exec.first_name
+      %tr
+        %th middle_name
+        %td= exec.middle_name
+      %tr
+        %th surname
+        %td= exec.surname
+      %tr
+        %th address_one
+        %td= exec.address_one
+      %tr
+        %th address_two
+        %td= exec.address_two
+      %tr
+        %th city
+        %td= exec.city
+      %tr
+        %th county
+        %td= exec.county
+      %tr
+        %th postcode
+        %td= exec.postcode
+      %tr
+        %th country
+        %td= exec.country
+
+- if @admin
+  %table
+    %tr
+      %th
+        %h5 Administration
+    - if @admin.accept_admin
+      %tr
+        %th Notary Express
+        %td= @admin.accept_admin
+    - else
+      %tr
+        %th expanded_powers
+        %td= @admin.expanded_powers
+      %tr
+        %th borrow_powers
+        %td= @admin.borrow_powers
+      %tr
+        %th appoint_admin_powers
+        %td= @admin.appoint_admin_powers
+      %tr
+        %th buy_sell_powers
+        %td= @admin.buy_sell_powers
+      %tr
+        %th liability_powers
+        %td= @admin.liability_powers
+
+- if @guardians || @guardians_rep
+  %table
+    %tr
+      %th
+        %h5 Guardians
+    - @guardians.each_with_index do |exec, i|
+      - if exec
+        %tr
+          %td
+            %h6= "Guardian #{i+1}"
+        %tr
+          %th relationship
+          %td= exec.relationship
+        %tr
+          %th first_name
+          %td= exec.first_name
+        %tr
+          %th middle_name
+          %td= exec.middle_name
+        %tr
+          %th surname
+          %td= exec.surname
+        %tr
+          %th address_one
+          %td= exec.address_one
+        %tr
+          %th address_two
+          %td= exec.address_two
+        %tr
+          %th city
+          %td= exec.city
+        %tr
+          %th county
+          %td= exec.county
+        %tr
+          %th postcode
+          %td= exec.postcode
+        %tr
+          %th country
+          %td= exec.country
+    - @guardians_rep.each_with_index do |exec, i|
+      - if exec
+        %tr
+          %td
+            %h6= "Replacement Guardian #{i+1}"
+        %tr
+          %th relationship
+          %td= exec.relationship
+        %tr
+          %th first_name
+          %td= exec.first_name
+        %tr
+          %th middle_name
+          %td= exec.middle_name
+        %tr
+          %th surname
+          %td= exec.surname
+        %tr
+          %th address_one
+          %td= exec.address_one
+        %tr
+          %th address_two
+          %td= exec.address_two
+        %tr
+          %th city
+          %td= exec.city
+        %tr
+          %th county
+          %td= exec.county
+        %tr
+          %th postcode
+          %td= exec.postcode
+        %tr
+          %th country
+          %td= exec.country
+%fieldset
+  %legend Cash Gifts
+  - @cash_gifts.each_with_index do |cash_gift, i|
+    %table
+      %tr
+        %td
+          %h5= "Gift #{i+1}"
+      %tr
+        %th shared_to
+        %td= cash_gift.shared_to
+      - if cash_gift.shared_to == "no"
+        %tr
+          %th relationship
+          %td= cash_gift.relationship
+        %tr
+          %th first_name
+          %td= cash_gift.first_name
+        %tr
+          %th middle_name
+          %td= cash_gift.middle_name
+        %tr
+          %th surname
+          %td= cash_gift.surname
+        %tr
+          %th address_one
+          %td= cash_gift.address_one
+        %tr
+          %th address_two
+          %td= cash_gift.address_two
+        %tr
+          %th city
+          %td= cash_gift.city
+        %tr
+          %th county
+          %td= cash_gift.county
+        %tr
+          %th postcode
+          %td= cash_gift.postcode
+        %tr
+          %th country
+        %td= cash_gift.country
+      %tr
+        %th amount
+        %td= cash_gift.amount
+      %tr
+        %th certain_age
+        %td= cash_gift.certain_age
+      %tr
+        %th if_dead
+        %td= cash_gift.if_dead
+      %tr
+        %th certain_age_if_dead
+        %td= cash_gift.certain_age_if_dead
+
+%table
+  %tr
+    %td
+      %h5 Charitable Donations
+    - @charitable_donations.each do |cd|
+      %tr
+        %td
+          %h5= cd.popular_charity ? cd.popular_charity_name : cd.name
+      %tr  
+        %th popular_charity
+        %td= cd.popular_charity
+      %tr  
+        %th popular_charity_name
+        %td= cd.popular_charity_name
+      - unless cd.popular_charity
+        %tr  
+          %th name
+          %td= cd.name
+        %tr  
+          %th registered_charity_number
+          %td= cd.registered_charity_number
+        %tr  
+          %th address_one
+          %td= cd.address_one
+        %tr  
+          %th address_two
+          %td= cd.address_two
+        %tr  
+          %th city
+          %td= cd.city
+        %tr  
+          %th county
+          %td= cd.county
+        %tr  
+          %th country
+          %td= cd.country
+        %tr  
+          %th postcode
+          %td= cd.postcode
+        %tr  
+        %th amount
+        %td= cd.amount
+      %tr  
+        %th instruction
+        %td= cd.instruction
+
+%table
+  %tr
+    %td
+      %h5 Charity Option
+  %tr
+    %th permission
+    %td= @charity_permission.permission
+
+%table
+  %tr
+    %td
+      %h5 Property
+    %th land_reg_number"
+    %td
+    %th address_one"
+    %td
+    %th address_two"
+    %td
+    %th city"
+    %td
+    %th county"
+    %td
+    %th country"
+    %td
+    %th postcode"
+    %td
+    %th sole_residence"
+    %td
+    %th recipient_no"
+    %td
+    %th joint_or_common"
+    %td
+    %th responsible_for_charges"
+    %td
+    %th as_cash_if_sold"
+    %td
+    %th held_in_trust"
+    %td
+    %th life_beneficiary_no"
+    %td
+
+%table
+  %tr
+    %td
+      %h5 Personal Gifts
+    %th relationship"
+    %td
+    %th first_name"
+    %td
+    %th middle_name"
+    %td
+    %th surname"
+    %td
+    %th address_one"
+    %td
+    %th address_two"
+    %td
+    %th city"
+    %td
+    %th county"
+    %td
+    %th postcode"
+    %td
+    %th country"
+    %td
+    %th will_id"
+    %td
+    %th description"
+    %td
+    %th as_cash_if_sold"
+    %td
+
+%table
+  %tr
+    %td
+      %h5 Residuary
+    %th residuary_type
+    %td
+    %th share
+    %td
+    %th certain_age
+    %td
+    %th if_dead
+    %td
+    %th if_dead_certain_age
+    %td
+    %th created_at
+    %td
+    %th updated_at
+    %td
+    %th count
+    %td
+    %th secondary
+    %td
+
+%table
+  %tr
+    %td
+      %h5 Request
+    %th requests cd.
+    %td
+    %th specific
+    %td

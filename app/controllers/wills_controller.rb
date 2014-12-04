@@ -11,12 +11,14 @@ class WillsController < ApplicationController
     @testator_details = @will.testator_general_details
     @testator = @will.testator_detail
     @partner_details = @will.partner_general_details
+    @partner = @will.partner_detail
     @funeral = @will.funeral
     @executor = @will.executor
     @first_executor = @will.first_executor
     @second_executor = @will.second_executor
     @third_executor = @will.third_executor
     @forth_executor = @will.forth_executor
+    @execs = [@first_executor , @second_executor , @third_executor , @forth_executor]
     @first_executor_rep = @will.first_replacement_executor
     @second_executor_rep = @will.second_replacement_executor
     @third_executor_rep = @will.third_replacement_executor
@@ -44,6 +46,7 @@ class WillsController < ApplicationController
     @cash_gifts = @will.cash_gifts
 
     @charitable_donations = @will.charitable_donations
+    @charity_permission = @will.charity_permission
 
     @admin = @will.administration
 

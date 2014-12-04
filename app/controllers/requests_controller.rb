@@ -7,6 +7,7 @@ class RequestsController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
@@ -27,6 +28,7 @@ class RequestsController < ApplicationController
   end
 
   def update
+    @will = Will.find(params[:will_id])
     if @request.update(request_params)
       redirect_to @request, notice: 'Request was successfully updated.'
     else

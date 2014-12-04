@@ -1,5 +1,6 @@
 %p.section-text You can make specific gifts of personal items.
 = form_for [@will, @personal_gift] do |f|
+  = render 'layouts/error_messages', object: f.object
   = render "layouts/text_field", :f => f, text_field: :relationship, q_no: "00010", origin: @personal_gift
   = render "layouts/text_field", :f => f, text_field: :first_name, origin: @personal_gift
   = render "layouts/text_field", :f => f, text_field: :middle_name, origin: @personal_gift

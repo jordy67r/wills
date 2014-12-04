@@ -1,6 +1,7 @@
 %h4.subheader You can specify your funeral wishes and organ donation or leave these decisions to your family.
 %hr
 = form_for [@will, @funeral] do |f|
+  = render 'layouts/error_messages', object: f.object
 
   = render "layouts/select_list", :f => f, select_list: :preference, q_no: "02010", options: ["I have no preference" , "I would like my body to be buried" , "I would like my body to be cremated"]
   = render "layouts/text_area", :f => f, text_area: :wishes, q_no: "02020"

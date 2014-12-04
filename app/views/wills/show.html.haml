@@ -1,48 +1,48 @@
-- if current_will.complete
-  FIN!
+- if @will.complete
+  = render 'summary_tables'
 - else
   %h1 Will Summary
   %p Will not yet complete
 
-  - if current_will.residuary
-    = link_to("Resume Will", new_will_request_path(current_will))
+  - if @will.residuary
+    = link_to("Resume Will", new_will_request_path(@will))
 
-  - elsif current_will.residuary_details.any?
-    = link_to("Resume Will", will_residuary_details_path(current_will))
+  - elsif @will.residuary_details.any?
+    = link_to("Resume Will", will_residuary_details_path(@will))
 
-  - elsif current_will.personal_gifts.any?
-    = link_to("Resume Will", will_personal_gifts_path(current_will))
+  - elsif @will.personal_gifts.any?
+    = link_to("Resume Will", will_personal_gifts_path(@will))
 
-  - elsif current_will.properties.any?
-    = link_to("Resume Will", will_properties_path(current_will))
+  - elsif @will.properties.any?
+    = link_to("Resume Will", will_properties_path(@will))
 
-  - elsif current_will.charitable_donations.any?
-    = link_to("Resume Will", will_charitable_donations_path(current_will))
+  - elsif @will.charitable_donations.any?
+    = link_to("Resume Will", will_charitable_donations_path(@will))
 
-  - elsif current_will.cash_gifts.any?
-    = link_to("Resume Will", will_cash_gifts_path(current_will))
+  - elsif @will.cash_gifts.any?
+    = link_to("Resume Will", will_cash_gifts_path(@will))
 
-  - elsif current_will.guardian
-    = link_to("Resume Will", option_will_cash_gifts_path(current_will))
+  - elsif @will.guardian
+    = link_to("Resume Will", option_will_cash_gifts_path(@will))
 
-  - elsif current_will.administration
-    = link_to("Resume Will", new_will_guardian_path(current_will))
+  - elsif @will.administration
+    = link_to("Resume Will", new_will_guardian_path(@will))
 
-  - elsif current_will.executor
-    - if current_will.executor.notary_express
-      = link_to("Resume Will", new_will_guardian_path(current_will))
+  - elsif @will.executor
+    - if @will.executor.notary_express
+      = link_to("Resume Will", new_will_guardian_path(@will))
     - else
-      = link_to("Resume Will", new_will_administration_path(current_will))
+      = link_to("Resume Will", new_will_administration_path(@will))
 
-  - elsif current_will.funeral
-    = link_to("Resume Will", new_will_executor_path(current_will))
+  - elsif @will.funeral
+    = link_to("Resume Will", new_will_executor_path(@will))
 
-  - elsif current_will.partner_detail
-    = link_to("Resume Will", new_will_funeral_path(current_will)) 
+  - elsif @will.partner_detail
+    = link_to("Resume Will", new_will_funeral_path(@will)) 
 
-  - elsif current_will.testator_detail
-    = link_to("Resume Will", edit_will_testator_detail_path(current_will, current_will.testator_detail)) 
+  - elsif @will.testator_detail
+    = link_to("Resume Will", edit_will_testator_detail_path(@will, @will.testator_detail)) 
 
   - else
-    = link_to("Resume Will", new_will_testator_detail_path(current_will)) 
+    = link_to("Resume Will", new_will_testator_detail_path(@will)) 
 

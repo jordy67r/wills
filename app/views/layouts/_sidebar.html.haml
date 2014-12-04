@@ -1,7 +1,7 @@
 %ul.side-nav
   - if current_will?
     %li= will_link(current_will.testator_detail, "Personal Details", "testator_details")
-    -if current_will.testator_detail
+    -if current_will.partner_detail
       - if current_will.testator_detail.mirror_will == "yes" || current_will.testator_detail.planning_marrige
         %li= will_link(current_will.partner_detail, "Partner Details", "partner_details")
     %li= will_link(current_will.funeral, "Funeral Details", "funerals")

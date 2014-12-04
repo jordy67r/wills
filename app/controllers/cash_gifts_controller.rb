@@ -42,7 +42,11 @@ class CashGiftsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @cash_gift.update(cash_gift_params)
-      redirect_to @cash_gift, notice: 'Cash gift was successfully updated.'
+      if params[:commit] == "Add Another"
+        redirect_to new_will_cash_gift_path
+      elsif params[:commit] == "Proceed"
+        redirect_to option_will_charitable_donations_path(@will)
+      end
     else
       render :edit
     end

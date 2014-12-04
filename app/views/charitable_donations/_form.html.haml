@@ -1,6 +1,7 @@
 %h4.subheader You can make cash gifts to charities.
 %hr
 = form_for [@will, @charitable_donation] do |f|
+  = render 'layouts/error_messages', object: f.object
 
   = render "layouts/radio_buttons", :f => f, radio_button: :popular_charity, q_no: "07020", option: {true: "Yes", false: "No"}, selected: 0
   %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#charitable_donation_popular_charity_true", "data-true" => "show"}

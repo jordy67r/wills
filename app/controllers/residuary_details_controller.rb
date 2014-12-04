@@ -12,6 +12,7 @@ class ResiduaryDetailsController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def index
@@ -29,7 +30,7 @@ class ResiduaryDetailsController < ApplicationController
     end
     if @residuary_detail.save
       if @residuary_detail.residuary_type == "I do not wish to specify a beneficiary"
-        redirect_to new_will_residuary_path
+        redirect_to new_will_request_path
       elsif @residuary_detail.residuary_type == "Charity"
         redirect_to will_residuary_detail_charity_benificiary_path(@will, @residuary_detail)
       else
@@ -43,19 +44,24 @@ class ResiduaryDetailsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @residuary_detail.update(residuary_detail_params)
-
       if params[:commit] == "Add Another"
         if @residuary_detail.secondary
           redirect_to secondary_will_residuary_details_path
         else
           redirect_to new_will_residuary_detail_path
         end
-      else
+      elsif params[:commit] == "Proceed"
         if @residuary_detail.secondary
           redirect_to new_will_request_path
         else
           redirect_to new_will_residuary_path
         end
+      elsif @residuary_detail.residuary_type == "I do not wish to specify a beneficiary"
+        redirect_to new_will_request_path
+      elsif @residuary_detail.residuary_type == "Charity"
+        redirect_to will_residuary_detail_charity_benificiary_path(@will, @residuary_detail)
+      else
+        redirect_to will_residuary_detail_people_benificiary_path(@will, @residuary_detail)
       end
     else
       if @residuary_detail.residuary_type == "Individual" || @residuary_detail.residuary_type == "My children"||@residuary_detail.residuary_type == "My grandchildren"
@@ -71,13 +77,13 @@ class ResiduaryDetailsController < ApplicationController
   def people_benificiary
     @will = Will.find(params[:will_id])
     @residuary_detail = ResiduaryDetail.find(params[:residuary_detail_id])
-    @residuary_detail.build_individual_residuary_general_detail
+    @resgen = @residuary_detail.individual_residuary_general_detail || @residuary_detail.build_individual_residuary_general_detail
   end
 
   def charity_benificiary
     @will = Will.find(params[:will_id])
     @residuary_detail = ResiduaryDetail.find(params[:residuary_detail_id])
-    @residuary_detail.build_charity_residuary_general_detail
+    @resgen = @residuary_detail.charity_residuary_general_detail || @residuary_detail.build_charity_residuary_general_detail
   end
 
   private

@@ -1317,6 +1317,16 @@ a.cancel-forward {
 a.cancel-forward:hover {
     background-color: #2E86CF;
 }
+.errors_container label {
+    color: #f04124;
+    float: left;
+    margin-right: 1rem;
+}
+
+.errors_container .field_with_errors {
+    float: left;
+    margin-right: 0.45rem;
+}
 .prefix label { line-height: 2rem; }
 .check-box-question label {
   line-height: 2rem;

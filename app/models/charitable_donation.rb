@@ -12,6 +12,8 @@ class CharitableDonation < ActiveRecord::Base
     validates :county, presence: true, length: { maximum: 100 }, unless: "popular_charity"
     validates :country, presence: true, length: { maximum: 100 }, unless: "popular_charity"
 
+    validates :instruction, length: { maximum: 2000 }, allow_blank: true
+
   def full_address
     self.address_one {+ ", " + self.address_two if address_two} + ", " + self.city + ", " + self.county + ", " + self.postcode + ", " + self.country
   end

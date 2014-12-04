@@ -7,6 +7,7 @@ class FuneralsController < ApplicationController
   end
 
   def edit
+    
     @will = Will.find(params[:will_id])
   end
 
@@ -27,6 +28,7 @@ class FuneralsController < ApplicationController
   end
 
   def update
+    @will = Will.find(params[:will_id])
     if @funeral.update(funeral_params)
       redirect_to new_will_executor_path
     else
