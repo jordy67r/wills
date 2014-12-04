@@ -35,7 +35,7 @@ $base-font-size: 87.5%;
 // $include-html-block-grid-classes: $include-html-classes; 
 // $include-xl-html-grid-classes: false;
 
-$row-width: rem-calc(1200);
+$row-width: rem-calc(1400);
 // $total-columns: 12;
 
 // Global
@@ -1299,6 +1299,24 @@ $primary-color: #9b59b6;
 
 @import 'foundation';
 
+.side-nav span {
+    display: block; 
+    color: #666; margin: 0; padding: 0.4375rem 0.875rem;
+}
+
+.side-nav .active {
+    font-weight: bold;
+}
+.side-nav li {
+  list-style: none;
+}
+a.cancel-forward {
+    background-color: #4A84BD;
+}
+
+a.cancel-forward:hover {
+    background-color: #2E86CF;
+}
 .prefix label { line-height: 2rem; }
 .check-box-question label {
   line-height: 2rem;
@@ -1311,6 +1329,9 @@ $primary-color: #9b59b6;
 .button-region {
   clear: both;
   display: block;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid #ccc;
 }
 .field_with_errors {
   label {
@@ -1506,7 +1527,35 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     box-shadow: none !important;
     border-radius: 3px !important;
 }
-
+body.home {
+  background-image: url(banner.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  #intro {
+    text-align: center;
+    color: #fff;
+    h1, h2 {
+      color: inherit;
+    }
+    h1 {
+      font-size: 2rem;
+      padding-top: 12rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+      padding-bottom: 3rem;
+    }
+    a {
+      border: 0.25rem solid;
+      padding: 1rem 5rem;
+      color: inherit;
+      letter-spacing: 1px;
+      border-radius: 2rem;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+  }
+}
 /* styling for abbr */
 .pika-table abbr {
     border-bottom: none;
@@ -1519,4 +1568,8 @@ p.advice-text {
   color: #666;
   font-style: italic;
   position: relative;
+}
+
+.top-bar {
+  margin-bottom: 2rem;
 }

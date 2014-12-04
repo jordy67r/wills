@@ -10,16 +10,25 @@ class CharitableDonationsController < ApplicationController
     @will = Will.find(params[:will_id])
   end
 
+  def index
+    @will = Will.find(params[:will_id])
+    @charitable_donations = @will.charitable_donations
+  end
+
   def create
     @will = Will.find(params[:will_id])
-    @charitable_donation = CharitableDonation.new(charitable_donation_params)
-    @charitable_donation.will_id = params[:will_id]
+    if @will.charitable_donations.last && @charitable_donation = @will.charitable_donations.find_by(count: params[:charitable_donation][:count])
+      @charitable_donation.update(charitable_donation_params)
+    else
+      @charitable_donation = CharitableDonation.new(charitable_donation_params)
+      @charitable_donation.will_id = params[:will_id]
+    end
     if @charitable_donation.save
       if params[:commit] == "Add Another"
         redirect_to new_will_charitable_donation_path
       elsif params[:commit] == "Proceed"
         @will = Will.find(params[:will_id])
-        redirect_to option_will_properties_path(@will)
+        redirect_to new_will_charity_permission_path
       end
     else
       render :new
@@ -29,7 +38,7 @@ class CharitableDonationsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @charitable_donation.update(charitable_donation_params)
-      redirect_to @charitable_donation, notice: 'Charitable donation was successfully updated.'
+      redirect_to new_will_charity_permission_path
     else
       render :edit
     end
@@ -46,6 +55,6 @@ class CharitableDonationsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def charitable_donation_params
-      params.require(:charitable_donation).permit(:charity_id, :amount, :instruction, :allow_alternate, :popular_charity, :popular_charity_name, :name, :registered_charity_number, :address_one, :address_two, :city, :postcode, :county, :country)
+      params.require(:charitable_donation).permit(:count, :charity_id, :amount, :instruction, :allow_alternate, :popular_charity, :popular_charity_name, :name, :registered_charity_number, :address_one, :address_two, :city, :postcode, :county, :country)
     end
 end

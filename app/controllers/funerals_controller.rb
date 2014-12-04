@@ -7,6 +7,7 @@ class FuneralsController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
@@ -19,7 +20,7 @@ class FuneralsController < ApplicationController
       @funeral.will_id = params[:will_id]
     end
     if @funeral.save
-      redirect_to new_will_executor_path, notice: 'Funeral was successfully created.'
+      redirect_to new_will_executor_path
     else
       render :new
     end
@@ -27,7 +28,7 @@ class FuneralsController < ApplicationController
 
   def update
     if @funeral.update(funeral_params)
-      redirect_to @funeral, notice: 'Funeral was successfully updated.'
+      redirect_to new_will_executor_path
     else
       render :edit
     end

@@ -30,14 +30,18 @@ $('[data-require]').each(function(){
 		}
 	}
 	checkCondition();
-
-	switch(type.toLowerCase()) {
-		case "radio":
-			$('input[type=' + type + '][name=' + $(require).attr('name') + ']').on("click", checkCondition);
-			break;
-		case "checkbox":
-			$('input[type=' + type + ']').on("click", checkCondition);
-			break;
+	if (type) {
+		switch(type.toLowerCase()) {
+			case "radio":
+				$('input[type=' + type + '][name=' + $(require).attr('name') + ']').on("click", checkCondition);
+				break;
+			case "checkbox":
+				$('input[type=' + type + ']').on("click", checkCondition);
+				break;
+		}
+	} else {
+		console.log($(require).parent())
+		$(require).parent().on("click", checkCondition)
 	}
 
 });
@@ -78,8 +82,14 @@ $('[data-tooltip]').each(function(i){
 //DATA-VALIDATION
 $('[data-match]').each(function(){
 	match = $(this).attr("data-validation");
+});
 
-
+//DATA-INIT
+$('[data-init]').each(function(){
+	callback = $(this).attr('data-init')
+	if (typeof window[callback] === "function") {
+		window[callback](this)
+	}
 });
 
 

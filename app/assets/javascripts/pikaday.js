@@ -622,7 +622,7 @@ var m_names = ['January','February','March','April','May','June','July','August'
        {
 
            var date = this._d.getDate().toString()
-           var month = m_names[this._d.getMonth()-1]
+           var month = m_names[this._d.getMonth()]
            var year = this._d.getFullYear()
            if (date.length == 1) {
                date = "0" + date
@@ -1014,7 +1014,6 @@ new Pikaday(
   field: document.getElementById('testator_detail_dob'),
   firstDay: 1,
   minDate: new Date('1900-01-01'),
-  maxDate: new Date('2000-12-31'),
   yearRange: [1900,2000]
 });
 new Pikaday(
@@ -1022,7 +1021,6 @@ new Pikaday(
   field: document.getElementById('partner_detail_dob'),
   firstDay: 1,
   minDate: new Date('1900-01-01'),
-  maxDate: new Date('2000-12-31'),
   yearRange: [1900,2000]
 });
 

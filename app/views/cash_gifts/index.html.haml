@@ -1,0 +1,20 @@
+- provide(:title, "Cash Gifts")
+
+%h1 Cash Gifts
+%h2.section-sub-heading You can make specific gifts of money.
+%hr
+
+
+%table
+  %thead
+    %tr
+      %th Cash Gift
+      %th Amount
+  %tbody
+    - @cash_gifts.each_with_index do |cash_gift, i|
+      %tr
+        %td= link_to("Gift #{i}", edit_will_cash_gift_path(@will, cash_gift))
+        %td= cash_gift.amount
+
+= link_to("Add Cash Gift", new_will_cash_gift_path)
+= link_to("Proceed", option_will_charitable_donations_path(@will))

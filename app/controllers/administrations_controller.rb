@@ -7,6 +7,7 @@ class AdministrationsController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
@@ -27,7 +28,7 @@ class AdministrationsController < ApplicationController
 
   def update
     if @administration.update(administration_params)
-      redirect_to @administration, notice: 'Administration was successfully updated.'
+      redirect_to new_will_guardian_path
     else
       render :edit
     end

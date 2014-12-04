@@ -7,6 +7,7 @@ class ExecutorsController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
@@ -25,6 +26,9 @@ class ExecutorsController < ApplicationController
         else
           redirect_to will_executor_second_executor_path(@will, @executor)
         end
+      elsif !@executor.first && !@executor.notary_express
+        @executor.update_attributes(second: false)
+        redirect_to will_executor_first_replacement_executor_path(@will, @executor)
       elsif @executor.second
         redirect_to will_executor_second_executor_path(@will, @executor)
       else
@@ -38,7 +42,19 @@ class ExecutorsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @executor.update(executor_params)
-      if @executor.replacement_forth && params[:executor][:third_replacement_executor_general_detail_attributes]
+      if params[:commit] == "Update"
+        if @executor.first
+          unless @executor.notary_express
+            redirect_to will_executor_first_executor_path(@will, @executor)
+          else
+            redirect_to will_executor_second_executor_path(@will, @executor)
+          end
+        elsif @executor.second
+          redirect_to will_executor_second_executor_path(@will, @executor)
+        else
+          redirect_to will_executor_first_replacement_executor_path(@will, @executor)
+        end
+      elsif @executor.replacement_forth && params[:executor][:third_replacement_executor_general_detail_attributes]
         redirect_to will_executor_forth_replacement_executor_path(@will, @executor)
       elsif @executor.replacement_third && params[:executor][:second_replacement_executor_general_detail_attributes]
         redirect_to will_executor_third_replacement_executor_path(@will, @executor)
@@ -89,43 +105,42 @@ class ExecutorsController < ApplicationController
   def first_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_first_executor_general_detail
+    @first = @will.first_executor || @executor.build_first_executor_general_detail
   end
   def second_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_second_executor_general_detail
+    @second = @will.second_executor || @executor.build_second_executor_general_detail
   end
   def third_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_third_executor_general_detail
+    @third = @will.third_executor || @executor.build_third_executor_general_detail
   end
   def forth_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_forth_executor_general_detail
+    @forth = @will.forth_executor || @executor.build_forth_executor_general_detail
   end
   def first_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_first_replacement_executor_general_detail
+    @first_rep = @will.first_replacement_executor || @executor.build_first_replacement_executor_general_detail
   end
   def second_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_second_replacement_executor_general_detail
+    @second_rep = @will.second_replacement_executor || @executor.build_second_replacement_executor_general_detail
   end
   def third_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_third_replacement_executor_general_detail
+    @third_rep = @will.third_replacement_executor || @executor.build_third_replacement_executor_general_detail
   end
   def forth_replacement_executor
     @will = Will.find(params[:will_id])
     @executor = Executor.find(params[:executor_id])
-    @executor.build_forth_replacement_executor_general_detail
-    @origin
+    @forth_rep = @will.forth_replacement_executor || @executor.build_forth_replacement_executor_general_detail
   end
 
 

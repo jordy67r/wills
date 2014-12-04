@@ -7,6 +7,7 @@ class ResiduariesController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
@@ -19,7 +20,7 @@ class ResiduariesController < ApplicationController
       @residuary.will_id = params[:will_id]
     end
     if @residuary.save
-      redirect_to new_will_request_path
+      redirect_to secondary_will_residuary_details_path
     else
       render :new
     end
@@ -27,7 +28,7 @@ class ResiduariesController < ApplicationController
 
   def update
     if @residuary.update(residuary_params)
-      redirect_to @residuary, notice: 'Residuary was successfully updated.'
+      redirect_to secondary_will_residuary_details_path
     else
       render :edit
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127150406) do
+ActiveRecord::Schema.define(version: 20141204112434) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,6 +92,15 @@ ActiveRecord::Schema.define(version: 20141127150406) do
   end
 
   add_index "charity_details", ["will_id"], name: "index_charity_details_on_will_id", using: :btree
+
+  create_table "charity_permissions", force: true do |t|
+    t.boolean  "permission"
+    t.integer  "will_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "charity_permissions", ["will_id"], name: "index_charity_permissions_on_will_id", using: :btree
 
   create_table "executors", force: true do |t|
     t.integer  "will_id"
@@ -239,6 +248,7 @@ ActiveRecord::Schema.define(version: 20141127150406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "count"
+    t.boolean  "complete",                default: false
   end
 
   add_index "properties", ["will_id"], name: "index_properties_on_will_id", using: :btree
@@ -279,6 +289,8 @@ ActiveRecord::Schema.define(version: 20141127150406) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "count"
+    t.boolean  "secondary",           default: false
+    t.boolean  "complete",            default: false
   end
 
   add_index "residuary_details", ["will_id"], name: "index_residuary_details_on_will_id", using: :btree
@@ -318,6 +330,7 @@ ActiveRecord::Schema.define(version: 20141127150406) do
     t.string   "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "complete",   default: false
   end
 
 end

@@ -38,4 +38,15 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.url if request.get?
   end
+
+  private
+
+    def require_login
+      unless signed_in?
+        #save the request they originally made
+        store_location
+        redirect_to signin_path
+      end
+
+    end
 end

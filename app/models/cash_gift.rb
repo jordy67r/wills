@@ -1,5 +1,5 @@
 class CashGift < ActiveRecord::Base
-  validates :amount, length: { maximum: 20 }
+  validates :amount, presence: true, length: { maximum: 20 }
   belongs_to :will
 
   validates :first_name, presence: true, length: { maximum: 100 }, if: :no_children

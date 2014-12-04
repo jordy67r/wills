@@ -11,13 +11,34 @@
     = javascript_include_tag "vendor/modernizr"
     = csrf_meta_tag
 
-  %body
-    %nav.top-bar{role:"navigation"}
-      = render "layouts/top_bar"
-    .row
-      .large-12.columns
-        - flash.each do |key, value|
-          %div{:class => "alert-box #{key}"}= value
-        = yield
+  %body{class: "#{yield(:bodyclass)}"}
+
+    
+    - if request.path == "/"
+      .row
+        .large-12.columns
+          - flash.each do |key, value|
+            %div{:class => "alert-box #{key}"}= value
+          = yield
+    - else 
+      %nav.top-bar{role:"navigation"}
+        = render "layouts/top_bar"
+      .row
+        - if signed_in?
+          .large-3.columns
+            = render 'layouts/sidebar'
+          .large-9.columns
+            - flash.each do |key, value|
+              %div{:class => "alert-box #{key}"}= value
+            = yield
+        - else
+          .large-3.columns
+            hello
+          .large-6.columns
+            - flash.each do |key, value|
+              %div{:class => "alert-box #{key}"}= value
+            = yield
+          .large-3.columns
+            his
 
     = javascript_include_tag "application"

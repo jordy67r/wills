@@ -9,6 +9,7 @@ class Will < ActiveRecord::Base
   has_one :request
   has_many :cash_gifts
   has_many :charitable_donations
+  has_one :charity_permission
   has_many :residuary_details
   has_many :personal_gifts
   has_many :properties

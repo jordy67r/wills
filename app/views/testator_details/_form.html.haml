@@ -1,7 +1,3 @@
-%h2.section-sub-heading Please Enter you Personal Details
-%p.section-text The information you provide shall be stored for regulatory compliance purposes and to provide you with the best possible service but it will not be used for marketing purposes or disclosed to third parties without your consent unless pursuant to a legal obligation. 
-%hr
-
 = form_for [@will, @testator_detail]  do |f|
   = render 'layouts/error_messages', object: f.object
 
@@ -12,13 +8,12 @@
 
   = render "layouts/text_field", :f => f, text_field: :phone_no, q_no: "01020", origin: @testator_detail
   = render "layouts/select_list", :f => f, select_list: :gender, q_no: "01030", options: ["Male", "Female"], origin: @testator_detail
-  [MAKE THIS A DATE PICKER]
   .pikaday
     = render "layouts/text_field", :f => f, text_field: :dob, q_no: "01040", origin: @testator_detail
   = render "layouts/select_list", :f => f, select_list: :domicile_country, advice_text: "This is your country of permanent residence or homeland",  q_no: "01050", options: TestatorDetail::COUNTRIES, origin: @testator_detail
-  
-  = render "layouts/radio_buttons", :f => f, radio_button: :children, advice_text: "Please select 'yes, including my partner's children' if your partner has one or more children and you want to include these when making provisions in your will for your children.", q_no: "01060",  option: {yes_my_own: "Yes, my own", yes_including_my_partners: "Yes, including my partner's", no: "No"}, selected: -1
-  %div{"data-condition" => ":checked", "data-false" => "show", "data-require" => "#testator_detail_children_no", "data-true" => "hide"}
+  .radio-container
+    = render "layouts/radio_buttons", :f => f, radio_button: :children, advice_text: "Please select 'yes, including my partner's children' if your partner has one or more children and you want to include these when making provisions in your will for your children.", q_no: "01060",  option: {yes_my_own: "Yes, my own", yes_including_my_partners: "Yes, including my partner's", no: "No"}, selected: -1
+  %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#testator_detail_children_yes_including_my_partners, #testator_detail_children_yes_my_own", "data-true" => "show"}
     = render "layouts/radio_buttons", :f => f, radio_button: :children_age, q_no: "01070", option: {true: "Yes", false: "No"}, selected: -1
   = render "layouts/radio_buttons", :f => f, radio_button: :planning_marrige, q_no: "01080", option: {true: "Yes", false: "No"}, selected: 1
   %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#testator_detail_planning_marrige_true", "data-true" => "show"}
@@ -27,5 +22,6 @@
   = render "layouts/radio_buttons", :f => f, radio_button: :tax_responsibility, advice_text: "If the recipients are not responsible for the taxes then the taxes will be paid from your estate, increasing the size of your gift, so consider whether your estate could afford to pay the taxes on all of the gifts", q_no: "01120", option: {true: "Yes", false: "No"}, selected: 0
   = render "layouts/radio_buttons", :f => f, radio_button: :mirror_will, q_no: "01130", option: {yes: "Yes", no: "No", not_applicable: "Not Applicable"}, selected: 2
 
-  = f.submit 'Save', class: "button radius"
+  .button-region
+    = f.submit 'Save', class: "button radius"
 

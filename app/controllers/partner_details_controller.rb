@@ -8,6 +8,7 @@ class PartnerDetailsController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
@@ -29,7 +30,7 @@ class PartnerDetailsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @partner_detail.update(partner_detail_params)
-      redirect_to @partner_detail, notice: 'Partner detail was successfully updated.'
+      redirect_to new_will_funeral_path
     else
       render :edit
     end

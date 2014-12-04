@@ -1,2 +1,5 @@
-%h1 StaticPages#home
-%p Find me in app/views/static_pages/home.html.haml
+-provide(:bodyclass , "home")
+#intro
+  %h1 Express Wills: Protect your future
+  %h2 Create a Will quickly and easily to ensure you wishes are carried out after your death
+  %p= link_to("Create New Will", new_will_path)

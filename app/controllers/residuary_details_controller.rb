@@ -6,13 +6,27 @@ class ResiduaryDetailsController < ApplicationController
     @residuary_detail = ResiduaryDetail.new
   end
 
+  def secondary
+    @will = Will.find(params[:will_id])
+    @residuary_detail = ResiduaryDetail.new
+  end
+
   def edit
   end
 
-  def create
-    @residuary_detail = ResiduaryDetail.new(residuary_detail_params)
-    @residuary_detail.will_id = params[:will_id]
+  def index
     @will = Will.find(params[:will_id])
+    @residuary_details = @will.residuary_details.where(complete:true)
+  end
+
+  def create
+    @will = Will.find(params[:will_id])
+    if @will.residuary_details.last && @residuary_detail = @will.residuary_details.find_by(count: params[:residuary_detail][:count])
+      @residuary_detail.update(residuary_detail_params)
+    else
+      @residuary_detail = ResiduaryDetail.new(residuary_detail_params)
+      @residuary_detail.will_id = params[:will_id]
+    end
     if @residuary_detail.save
       if @residuary_detail.residuary_type == "I do not wish to specify a beneficiary"
         redirect_to new_will_residuary_path
@@ -29,10 +43,19 @@ class ResiduaryDetailsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @residuary_detail.update(residuary_detail_params)
+
       if params[:commit] == "Add Another"
-        redirect_to new_will_residuary_detail_path
-      elsif params[:commit] == "Proceed"
-        redirect_to new_will_residuary_path
+        if @residuary_detail.secondary
+          redirect_to secondary_will_residuary_details_path
+        else
+          redirect_to new_will_residuary_detail_path
+        end
+      else
+        if @residuary_detail.secondary
+          redirect_to new_will_request_path
+        else
+          redirect_to new_will_residuary_path
+        end
       end
     else
       if @residuary_detail.residuary_type == "Individual" || @residuary_detail.residuary_type == "My children"||@residuary_detail.residuary_type == "My grandchildren"
@@ -63,7 +86,7 @@ class ResiduaryDetailsController < ApplicationController
     end
 
     def residuary_detail_params
-      params.require(:residuary_detail).permit(:share, :certain_age, :if_dead, :if_dead_certain_age, :residuary_type,
+      params.require(:residuary_detail).permit(:secondary, :complete, :count, :share, :certain_age, :if_dead, :if_dead_certain_age, :residuary_type,
         individual_residuary_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country], 
         charity_residuary_general_detail_attributes: [:id, :will_id, :relationship, :first_name, :middle_name, :surname, :address_one, :address_two, :city, :county, :postcode, :country, :name, :registered_charity_number])
     end

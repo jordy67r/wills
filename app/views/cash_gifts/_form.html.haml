@@ -24,3 +24,4 @@
   .button-region
     = f.submit 'Add Another', class: "button radius"
     = f.submit 'Proceed', class: "button radius"
+    = link_to 'Proceed Without Saving', option_will_charitable_donations_path(@will), class: "button radius cancel-forward right"

@@ -6,6 +6,7 @@ class TestatorDetail < ActiveRecord::Base
   
   validates :dob, presence: true
   validates :children, presence: true
+  validates_inclusion_of :children_age, :in => [true, false]
 
   COUNTRIES = [
 "United Kingdom" ,

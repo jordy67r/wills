@@ -19,6 +19,7 @@ class RequestsController < ApplicationController
       @request.will_id = params[:will_id]
     end
     if @request.save
+      @will.update_attributes(complete:true)
       redirect_to @will
     else
       render :new

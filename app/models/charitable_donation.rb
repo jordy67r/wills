@@ -1,6 +1,8 @@
 class CharitableDonation < ActiveRecord::Base
   belongs_to :will
 
+    validates :amount, presence: true
+
     validates :name, presence: true, length: { maximum: 200 }, unless: "popular_charity"
     validates :registered_charity_number, presence: true, length: { maximum: 20 }, unless: "popular_charity"
     validates :postcode, presence: true, length: { maximum: 10 }, unless: "popular_charity"

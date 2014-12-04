@@ -7,6 +7,7 @@ class GuardiansController < ApplicationController
   end
 
   def edit
+    @will = Will.find(params[:will_id])
   end
 
   def create
@@ -32,7 +33,13 @@ class GuardiansController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @guardian.update(guardian_params)
-      if @guardian.replacement_forth_guardian && params[:guardian][:third_replacement_guardian_general_detail_attributes]
+      if params[:commit] == "Update"
+        if @guardian.appoint_future_guardians || @guardian.appoint_current_guardians
+          redirect_to will_guardian_first_guardian_path(@will, @guardian)
+        else
+          redirect_to option_will_cash_gifts_path(@will)
+        end
+      elsif @guardian.replacement_forth_guardian && params[:guardian][:third_replacement_guardian_general_detail_attributes]
         redirect_to will_guardian_forth_replacement_guardian_path(@will, @guardian)
       elsif @guardian.replacement_third_guardian && params[:guardian][:second_replacement_guardian_general_detail_attributes]
         redirect_to will_guardian_third_replacement_guardian_path(@will, @guardian)
@@ -79,42 +86,42 @@ class GuardiansController < ApplicationController
   def first_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_first_guardian_general_detail
+    @guard = @will.first_guardian  || @guardian.build_first_guardian_general_detail
   end
   def second_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_second_guardian_general_detail
+    @guard = @will.second_guardian  || @guardian.build_second_guardian_general_detail
   end
   def third_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_third_guardian_general_detail
+    @guard = @will.third_guardian  || @guardian.build_third_guardian_general_detail
   end
   def forth_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_forth_guardian_general_detail
+    @guard = @will.forth_guardian  || @guardian.build_forth_guardian_general_detail
   end
   def first_replacement_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_first_replacement_guardian_general_detail
+    @guard = @will.first_replacement_guardian  || @guardian.build_first_replacement_guardian_general_detail
   end
   def second_replacement_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_second_replacement_guardian_general_detail
+    @guard = @will.second_replacement_guardian  || @guardian.build_second_replacement_guardian_general_detail
   end
   def third_replacement_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_third_replacement_guardian_general_detail
+    @guard = @will.third_replacement_guardian  || @guardian.build_third_replacement_guardian_general_detail
   end
   def forth_replacement_guardian
     @will = Will.find(params[:will_id])
     @guardian = Guardian.find(params[:guardian_id])
-    @guardian.build_forth_replacement_guardian_general_detail
+    @guard = @will.forth_replacement_guardian  || @guardian.build_forth_replacement_guardian_general_detail
     @origin
   end
 

@@ -22,8 +22,8 @@ function $(selector) {
 		elems = selectorWrapper.children
 	} else {
 		selector = selector.replace(/\[([^\[\]]*?(\[[^\]]*\])?[^\[\]]*?)\]/g, function(match, contents, offset, s){
-		return '[' + contents.replace(/([\[\]])/g, '\\$1') + ']';
-		});		
+			return '[' + contents.replace(/([\[\]])/g, '\\$1') + ']';
+		});
 		elems = document.querySelectorAll(selector);
 	}
 
@@ -42,7 +42,10 @@ function $(selector) {
 			}
 			return this;
 		},
-
+		//returns parent items
+		parent:function(){
+			return $(this.elements[0].parentElement)
+		},
 		//gets or sets entitys attributes
 		attr:function(name, value) {
 			if (value) {

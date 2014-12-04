@@ -34,6 +34,9 @@
       %h3 4th Replacement
       = f.fields_for :forth_replacement_benificiary_general_details do |builder|
         = render "general_details/general_details_form", :builder => builder, :nested_origin => @property.replacement_benificiary_general_details
+    = f.hidden_field :complete, value: true
 
+  = f.hidden_field :count, value: @will.properties.count
   = f.submit 'Add Another', class: "button radius"
   = f.submit 'Proceed', class: "button radius"
+  = link_to 'Proceed Without Saving', option_will_personal_gifts_path(@will), class: "button radius cancel-forward right"

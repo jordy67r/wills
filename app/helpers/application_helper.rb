@@ -17,4 +17,29 @@ module ApplicationHelper
       end
     end
   end 
+
+  def will_link(object, name, controller_name)
+    @will = current_will if current_will?
+    if object
+      if params[:controller] == controller_name
+        link_to name, [:edit, @will, object], class: "active"
+      else
+        link_to name, [:edit, @will, object]
+      end
+    else
+      if params[:controller] == controller_name
+        content_tag :span, name, class: "active"
+      else
+        content_tag :span, name
+      end
+    end
+  end
+
+  def will_sub_link(parent, object_spec, object, name)
+    @will = current_will if current_will?
+    if object_spec
+      "<li>#{link_to name, [@will, parent, object]}</li>".html_safe
+    end
+  end
+
 end

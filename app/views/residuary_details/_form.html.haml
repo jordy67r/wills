@@ -5,5 +5,5 @@
   =# render "layouts/select_list", :f => f, select_list: :if_dead_certain_age, q_no: "10050", options: ["no"] + (16..40).to_a.map {|i| i.to_s}
 
   = render "layouts/select_list", :f => f, select_list: :residuary_type, q_no: "10010", options: ["Charity" , "Individual" , "My children", "My grandchildren" , "I do not wish to specify a beneficiary"] 
-  
+  = f.hidden_field :count, value: @will.residuary_details.count+1
   = f.submit 'Save', class: "button radius"

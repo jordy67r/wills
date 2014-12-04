@@ -1,11 +1,7 @@
 Rails.application.routes.draw do
 
-
-  resources :property_details
-
-  resources :charity_details
-
   resources :wills do
+    get 'final_will'
     resources :testator_details, only: [:new, :edit, :create, :update]
     resources :partner_details, only: [:new, :edit, :create, :update]
     resources :funerals, only: [:new, :edit, :create, :update]
@@ -35,23 +31,25 @@ Rails.application.routes.draw do
         get :forth_replacement_guardian
 
     end
-    resources :cash_gifts, only: [:new, :edit, :create, :update] do
+    resources :cash_gifts, only: [:new, :edit, :create, :update, :index] do
       collection { get :option }
     end
-    resources :charitable_donations, only: [:new, :edit, :create, :update] do
+    resources :charitable_donations, only: [:new, :edit, :create, :update, :index] do
       collection { get :option }
     end
-    resources :properties, only: [:new, :edit, :create, :update] do
+    resources :charity_permissions, only: [:new, :edit, :create, :update]
+    resources :properties, only: [:new, :edit, :create, :update, :index] do
       collection { get :option }
       get :benificiaries
     end
-    resources :personal_gifts, only: [:new, :edit, :create, :update] do
+    resources :personal_gifts, only: [:new, :edit, :create, :update, :index] do
       collection { get :option }
     end
     resources :residuaries, only: [:new, :edit, :create, :update]
-    resources :residuary_details, only: [:new, :edit, :create, :update] do
+    resources :residuary_details, only: [:new, :edit, :create, :update, :index] do
         get :charity_benificiary
         get :people_benificiary 
+        collection { get :secondary }
     end
     resources :requests, only: [:new, :edit, :create, :update]
   end
