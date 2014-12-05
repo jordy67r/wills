@@ -1584,3 +1584,12 @@ p.advice-text {
   margin-bottom: 2rem;
 }
 table { width: 100%; }
+th {
+width: 16rem;
+}
+thead, td.summary {
+  color: #fff;
+  background: #575757!important;
+  tr th h5 {color: #fff;}
+  h6 { color: #fff; }
+}
