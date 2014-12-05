@@ -40,4 +40,13 @@ class Property < ActiveRecord::Base
     return array
   end
 
+  def life_beneficiaries
+    array = []
+    array << self.replacement_benificiary_general_details if self.replacement_benificiary_general_details
+    array << self.second_replacement_benificiary_general_details if self.second_replacement_benificiary_general_details
+    array << self.third_replacement_benificiary_general_details if self.third_replacement_benificiary_general_details
+    array << self.forth_replacement_benificiary_general_details if self.forth_replacement_benificiary_general_details
+    return array
+  end
+
 end

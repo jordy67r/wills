@@ -417,98 +417,256 @@
     %th permission
     %td= @charity_permission.permission
 
-%table
-  %tr
-    %td
-      %h5 Property
-    %th land_reg_number"
-    %td
-    %th address_one"
-    %td
-    %th address_two"
-    %td
-    %th city"
-    %td
-    %th county"
-    %td
-    %th country"
-    %td
-    %th postcode"
-    %td
-    %th sole_residence"
-    %td
-    %th recipient_no"
-    %td
-    %th joint_or_common"
-    %td
-    %th responsible_for_charges"
-    %td
-    %th as_cash_if_sold"
-    %td
-    %th held_in_trust"
-    %td
-    %th life_beneficiary_no"
-    %td
+- if @properties.any?
+  - @properties.each_with_index do |property|
+    %table
+      %tr
+        %td
+          %h5 Property
+      %tr
+        %th land_reg_number
+        %td= property.land_reg_number
+      %tr
+        %th address_one
+        %td= property.address_one
+      %tr
+        %th address_two
+        %td= property.address_two
+      %tr
+        %th city
+        %td= property.city
+      %tr
+        %th county
+        %td= property.county
+      %tr
+        %th country
+        %td= property.country
+      %tr
+        %th postcode
+        %td= property.postcode
+      %tr
+        %th sole_residence
+        %td= property.sole_residence
+      %tr
+        %th recipient_no
+        %td= property.recipient_no
+      %tr
+        %th joint_or_common
+        %td= property.joint_or_common
+      %tr
+        %th responsible_for_charges
+        %td= property.responsible_for_charges
+      %tr
+        %th as_cash_if_sold
+        %td= property.as_cash_if_sold
+      %tr
+        %th held_in_trust
+        %td= property.held_in_trust
+      %tr
+        %th life_beneficiary_no
+        %td= property.life_beneficiary_no
+      - property.beneficiaries.each_with_index do |ben, i|
+        %tr
+          %th= "Beneficiary #{i+1}"
+          %td
+            %table
+              %tr
+                %th relationship
+                %td= ben.relationship
+              %tr  
+                %th first_name
+                %td= ben.first_name
+              %tr  
+                %th middle_name
+                %td= ben.middle_name
+              %tr  
+                %th surname
+                %td= ben.surname
+              %tr  
+                %th address_one
+                %td= ben.address_one
+              %tr  
+                %th address_two
+                %td= ben.address_two
+              %tr  
+                %th city
+                %td= ben.city
+              %tr  
+                %th county
+                %td= ben.county
+              %tr  
+                %th postcode
+                %td= ben.postcode
+              %tr  
+                %th country
+                %td= ben.country
+      - property.life_beneficiaries.each_with_index do |ben, i|
+        %tr
+          %th= "Life Beneficiary #{i+1}"
+          %td
+            %table
+              %tr
+                %th relationship
+                %td= ben.relationship
+              %tr  
+                %th first_name
+                %td= ben.first_name
+              %tr  
+                %th middle_name
+                %td= ben.middle_name
+              %tr  
+                %th surname
+                %td= ben.surname
+              %tr  
+                %th address_one
+                %td= ben.address_one
+              %tr  
+                %th address_two
+                %td= ben.address_two
+              %tr  
+                %th city
+                %td= ben.city
+              %tr  
+                %th county
+                %td= ben.county
+              %tr  
+                %th postcode
+                %td= ben.postcode
+              %tr  
+                %th country
+                %td= ben.country
 
 %table
   %tr
     %td
       %h5 Personal Gifts
-    %th relationship"
-    %td
-    %th first_name"
-    %td
-    %th middle_name"
-    %td
-    %th surname"
-    %td
-    %th address_one"
-    %td
-    %th address_two"
-    %td
-    %th city"
-    %td
-    %th county"
-    %td
-    %th postcode"
-    %td
-    %th country"
-    %td
-    %th will_id"
-    %td
-    %th description"
-    %td
-    %th as_cash_if_sold"
-    %td
+  - @personal_gifts.each do |gift|
+    %tr
+      %th relationship
+      %td= gift.relationship
+    %tr  
+      %th first_name
+      %td= gift.first_name
+    %tr  
+      %th middle_name
+      %td= gift.middle_name
+    %tr  
+      %th surname
+      %td= gift.surname
+    %tr  
+      %th address_one
+      %td= gift.address_one
+    %tr  
+      %th address_two
+      %td= gift.address_two
+    %tr  
+      %th city
+      %td= gift.city
+    %tr  
+      %th county
+      %td= gift.county
+    %tr  
+      %th postcode
+      %td= gift.postcode
+    %tr  
+      %th country
+      %td= gift.country
+    %tr  
+      %th description
+      %td= gift.description
+    %tr  
+      %th as_cash_if_sold
+      %td= gift.as_cash_if_sold
 
-%table
-  %tr
-    %td
-      %h5 Residuary
-    %th residuary_type
-    %td
-    %th share
-    %td
-    %th certain_age
-    %td
-    %th if_dead
-    %td
-    %th if_dead_certain_age
-    %td
-    %th created_at
-    %td
-    %th updated_at
-    %td
-    %th count
-    %td
-    %th secondary
-    %td
+- if @residuaries.any?
+  - @residuaries.each_with_index do |res|
+    %table
+      %tr
+        %td
+          %h5 Residuary
+      %tr
+        %th residuary_type
+        %td= res.residuary_type
+      - if res.residuary_type == "Individual"
+        %tr
+          %th relationship
+          %td= res.individual_residuary_general_detail.relationship
+        %tr  
+          %th first_name
+          %td= res.individual_residuary_general_detail.first_name
+        %tr  
+          %th middle_name
+          %td= res.individual_residuary_general_detail.middle_name
+        %tr  
+          %th surname
+          %td= res.individual_residuary_general_detail.surname
+        %tr  
+          %th address_one
+          %td= res.individual_residuary_general_detail.address_one
+        %tr  
+          %th address_two
+          %td= res.individual_residuary_general_detail.address_two
+        %tr  
+          %th city
+          %td= res.individual_residuary_general_detail.city
+        %tr  
+          %th county
+          %td= res.individual_residuary_general_detail.county
+        %tr  
+          %th postcode
+          %td= res.individual_residuary_general_detail.postcode
+        %tr  
+          %th country
+          %td= res.individual_residuary_general_detail.country
+      - if res.residuary_type == "Charity"
+        %tr  
+          %th name
+          %td= res.charity_residuary_general_detail.name
+        %tr  
+          %th registered_charity_number
+          %td= res.charity_residuary_general_detail.registered_charity_number
+        %tr  
+          %th address_one
+          %td= res.charity_residuary_general_detail.address_one
+        %tr  
+          %th address_two
+          %td= res.charity_residuary_general_detail.address_two
+        %tr  
+          %th city
+          %td= res.charity_residuary_general_detail.city
+        %tr  
+          %th county
+          %td= res.charity_residuary_general_detail.county
+        %tr  
+          %th country
+          %td= res.charity_residuary_general_detail.country
+        %tr  
+          %th postcode
+          %td= res.charity_residuary_general_detail.postcode
+      %tr
+        %th share
+        %td= res.share
+      %tr
+        %th certain_age
+        %td= res.certain_age
+      %tr
+        %th if_dead
+        %td= res.if_dead
+      %tr
+        %th if_dead_certain_age
+        %td= res.if_dead_certain_age
+      %tr
+        %th count
+        %td= res.count
+      %tr
+        %th secondary
+        %td= res.secondary
 
-%table
-  %tr
-    %td
-      %h5 Request
-    %th requests cd.
-    %td
-    %th specific
-    %td
+- if @request.requests
+  %table
+    %tr
+      %td
+        %h5 Request
+    %tr
+      %th specific
+      %td= @request.specific

@@ -41,7 +41,7 @@ class WillsController < ApplicationController
 
     @personal_gifts = @will.personal_gifts
 
-    @properties = @will.properties
+    @properties = @will.properties.where(complete:true)
 
     @cash_gifts = @will.cash_gifts
 
@@ -51,6 +51,9 @@ class WillsController < ApplicationController
     @admin = @will.administration
 
     @request = @will.request
+
+    @residuaries = @will.residuary_details.where(complete:true)
+
   end
 
   def final_will
