@@ -141,7 +141,7 @@ class WillsController < ApplicationController
     end
 
     def will_params
-      params.require(:will).permit(:title)
+      params.require(:will).permit(:title, :term)
     end
 
     def signed_in_user
