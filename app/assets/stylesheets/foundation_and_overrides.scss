@@ -1319,8 +1319,10 @@ a.cancel-forward:hover {
 }
 .errors_container label {
     color: #f04124;
-    float: left;
     margin-right: 1rem;
+}
+.errors_container .field_with_errors label {
+  float: left;
 }
 
 .errors_container .field_with_errors {
@@ -1540,7 +1542,6 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 body.home {
   background-image: url(banner.jpg);
   background-size: 100%;
-  background-repeat: no-repeat;
   #intro {
     text-align: center;
     color: #fff;

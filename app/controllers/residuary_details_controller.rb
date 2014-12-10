@@ -13,6 +13,8 @@ class ResiduaryDetailsController < ApplicationController
 
   def edit
     @will = Will.find(params[:will_id])
+    @resgen = @residuary_detail.individual_residuary_general_detail || @residuary_detail.build_individual_residuary_general_detail
+    @resgens = @residuary_detail.charity_residuary_general_detail || @residuary_detail.build_charity_residuary_general_detail
   end
 
   def index
@@ -44,7 +46,9 @@ class ResiduaryDetailsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @residuary_detail.update(residuary_detail_params)
-      if params[:commit] == "Add Another"
+      if params[:commit] == "Submit"
+        redirect_to will_residuary_details_path(@will)
+      elsif params[:commit] == "Add Another"
         if @residuary_detail.secondary
           redirect_to secondary_will_residuary_details_path
         else

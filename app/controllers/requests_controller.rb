@@ -30,7 +30,8 @@ class RequestsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @request.update(request_params)
-      redirect_to @request, notice: 'Request was successfully updated.'
+      @will.update_attributes(complete:true)
+      redirect_to @will
     else
       render :edit
     end

@@ -93,7 +93,7 @@ $('[data-init]').each(function(){
 });
 
 //CLASS ADD
-if ($(".field_with_errors").elements) {
+if ($(".field_with_errors").elements.length) {
 	$(".radio-container").addClass("errors_container")
 }
 

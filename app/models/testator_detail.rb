@@ -8,7 +8,15 @@ class TestatorDetail < ActiveRecord::Base
   validates :children, presence: true
   PHONE_REG = /\A\+?[\d ]+\z/
   validates :phone_no, format: { with: PHONE_REG }
-  validates_inclusion_of :children_age, :in => [true, false]
+  validates_inclusion_of :children_age, :in => [true, false], if: :children_yes
+
+  def children_yes
+    if self.children == "no"
+      false
+    else
+      true
+    end
+  end
 
   COUNTRIES = [
 "United Kingdom" ,

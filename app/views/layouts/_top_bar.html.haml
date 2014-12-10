@@ -1,9 +1,10 @@
 %section.top-bar-section
+  %ul.left
+    %li= link_to("Express Wills", root_url)
   %ul.right
     - if signed_in?
-      %li= link_to "Sign Out", signout_path, method: "delete"
-      %li= link_to "Settings", edit_user_path(current_user)
-      %li= link_to "Profile", user_path(current_user)
       %li= link_to "Wills", wills_path
+      %li= link_to "Sign Out", signout_path, method: "delete"
+      
     - else
       %li= link_to "Sign In", signin_path

@@ -15,6 +15,8 @@
 
     
     - if request.path == "/"
+      %nav.top-bar{role:"navigation"}
+        = render "layouts/top_bar"
       .row
         .large-12.columns
           - flash.each do |key, value|
