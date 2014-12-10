@@ -5,9 +5,11 @@
   = f.fields_for :charity_residuary_general_detail do |builder|
     = render "charity_details/charity_details_form", :builder => builder, :nested_origin => @residuary_detail.charity_residuary_general_detail
 
+  - @option ||= ["Equal shares", "Trustees to decide"]
   - @start = 100
-  - @will.residuary_details.each { |x| @start -= x.share.gsub('%','').to_i if x.share.present? } 
-  = render "layouts/select_list", :f => f, select_list: :share, q_no: "10020", options: ["Equal shares", "Trustees to decide"] + (1..@start).to_a.map {|i| "#{i.to_s}%"}
+  - @residuary_detail.secondary ? @res = @will.residuary_details.where(secondary: true) : @res = @will.residuary_details.where(secondary: false)
+  - @res.each { |x| @start -= x.share.gsub('%','').to_i if x.share.present? } 
+  = render "layouts/select_list", :f => f, select_list: :share, q_no: "10020", options: @option + (1..@start).to_a.map {|i| "#{i.to_s}%"}
 
   = f.hidden_field :complete, value: true
   = f.submit 'Add Another', class: "button radius"
