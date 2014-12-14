@@ -14,7 +14,8 @@
   .radio-container
     = render "layouts/radio_buttons", :f => f, radio_button: :children, advice_text: "Please select 'yes, including my partner's children' if your partner has one or more children and you want to include these when making provisions in your will for your children.", q_no: "01060",  option: {yes_my_own: "Yes, my own", yes_including_my_partners: "Yes, including my partner's", no: "No"}, selected: -1
   %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#testator_detail_children_yes_including_my_partners, #testator_detail_children_yes_my_own", "data-true" => "show"}
-    = render "layouts/radio_buttons", :f => f, radio_button: :children_age, q_no: "01070", option: {true: "Yes", false: "No"}, selected: -1
+    .radio-container
+      = render "layouts/radio_buttons", :f => f, radio_button: :children_age, q_no: "01070", option: {true: "Yes", false: "No"}, selected: -1
   = render "layouts/radio_buttons", :f => f, radio_button: :planning_marrige, q_no: "01080", option: {true: "Yes", false: "No"}, selected: 1
   %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#testator_detail_planning_marrige_true", "data-true" => "show"}
     = render "layouts/radio_buttons", :f => f, radio_button: :effective_post_marrige, q_no: "01090", option: {true: "Yes", false: "No"}, selected: 0

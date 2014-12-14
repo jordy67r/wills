@@ -17,7 +17,7 @@
     - if request.path == "/"
       %nav.top-bar{role:"navigation"}
         = render "layouts/top_bar"
-      .row
+      #content.row
         .large-12.columns
           - flash.each do |key, value|
             %div{:class => "alert-box #{key}"}= value
@@ -25,7 +25,7 @@
     - else 
       %nav.top-bar{role:"navigation"}
         = render "layouts/top_bar"
-      .row
+      #content.row
         - if signed_in?
           .large-3.columns
             = render 'layouts/sidebar'

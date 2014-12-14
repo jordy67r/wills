@@ -1,8 +1,10 @@
 - provide(:title, "Sign in")
+.narrow-logo
+  = image_tag("logo.png")
 %h1 Sign in
-%h4.subheader To Create Wills, you must sign in.
 %p
-  New user? #{link_to "Sign up now!", signup_path}
+  To create and manage an Express Will you must sign in. New user? 
+  = link_to "Sign up now!", signup_path
 %hr
 
 

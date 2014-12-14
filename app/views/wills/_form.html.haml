@@ -8,5 +8,5 @@
   .field
     = f.check_box :term
     = f.label :term, "I agree to the #{ link_to 'terms and conditions', terms_and_conditions_path, target: '_blank'}".html_safe
-  .actions
+  .actions.button-region
     = f.submit 'Save', class: "button radius"

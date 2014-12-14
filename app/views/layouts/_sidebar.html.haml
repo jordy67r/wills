@@ -1,5 +1,5 @@
-%ul.side-nav
-  - if current_will?
+- if current_will?
+  %ul.side-nav
     %li= will_link(current_will.testator_detail, "Personal Details", "testator_details")
     -if current_will.partner_detail
       - if current_will.testator_detail.mirror_will == "yes" || current_will.testator_detail.planning_marrige
@@ -82,3 +82,10 @@
       %li= will_link(current_will.residuary, "Residuary Distributable", "residuaries")
       %li= will_link(current_will.request, "Requests", "requests")
       %li= link_to("Summary", will_path(current_will))
+- else
+  .spare-side
+    .logo-side
+      = image_tag("logo.png")
+    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam dictum eleifend eleifend. Aliquam tempor, quam a vulputate volutpat, odio enim tincidunt lacus, ac posuere dui tellus ac massa. Fusce quis dui eget sem sodales ullamcorper. 
+    %p Phasellus pellentesque laoreet erat ut mollis. In ut consectetur lorem. Proin blandit lobortis magna, ac dapibus elit pharetra et. 
+

@@ -42,7 +42,9 @@ class ExecutorsController < ApplicationController
   def update
     @will = Will.find(params[:will_id])
     if @executor.update(executor_params)
-      if params[:commit] == "Update"
+      if @executor.first 
+        redirect_to will_executor_first_executor_path(@will, @executor) unless @executor.notary_express
+      elsif params[:commit] == "Update"
         if @executor.first
           unless @executor.notary_express
             redirect_to will_executor_first_executor_path(@will, @executor)
