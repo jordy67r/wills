@@ -19,6 +19,7 @@ class Executor < ActiveRecord::Base
   accepts_nested_attributes_for :forth_replacement_executor_general_detail
 
   validates_inclusion_of :first, :in => [true, false], if: :notary_false
+  validates_inclusion_of :second, :in => [true, false], unless: :notary_false
 
   def notary_false
     if self.notary_express

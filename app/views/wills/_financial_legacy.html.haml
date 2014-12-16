@@ -1,6 +1,6 @@
 %p
   %b= "#{@count+=1}. FINANCIAL LEGACIES"
-%p= "#{@count}.1 I give #{'free of all taxes' if @testator.tax_responsibility}:"
+%p= "#{@count}.1 I give:"
 - @cash_gifts.each_with_index do |c, i|
   %p
     - if c.shared_to == "no"

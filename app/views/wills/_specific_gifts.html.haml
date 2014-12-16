@@ -1,7 +1,7 @@
 %p
   %b= "#{@count+=1}. SPECIFIC GIFTS"
 %p
-  = @testator.tax_responsibility ? "#{@count}.1 I give " : "#{@count}.1 I give free of all taxes:"
+  I give:
   %br
   - @personal_gifts.each_with_index do |gift, i|
     - letter = ('a'..'z').to_a[i]

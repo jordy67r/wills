@@ -31,13 +31,6 @@
     = render(:partial => "financial_legacy") if @cash_gifts.any?
     = render(:partial => "charitable_donations") if @charitable_donations
     = render(:partial => "residuaries") if @residuaries.any?
-
-
-    
-    
-    - unless @testator.tax_responsibility 
-      %b= "#{@count+=1}. TAXES"
-      %p My Trustees must pay all inheritance tax, capital gains tax and other taxes and charges payable as a result of my death on any specific gifts in this will from my Estate, unless otherwise %p stated elsewhere in this will. If my Trustees pay inheritance tax on a specific gift of an asset outside the United Kingdom, the payment of inheritance tax is itself free of inheritance tax.
     
     %b= "#{@count+=1}. SECTION 33 OF THE WILLS ACT 1837"
     %p Section 33 of the Wills Act 1837 does not apply to any gift in this will.

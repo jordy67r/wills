@@ -3,7 +3,7 @@
 %hr
 = form_for [@will, @cash_gift] do |f|
 
-  = render "layouts/radio_buttons", :f => f, radio_button: :shared_to, q_no: "06020", option: {no:"No" , all_of_my_children:"All of my children" , all_of_my_grandchildren:"All of my grandchildren"}, selected: 2
+  = render "layouts/radio_buttons", :f => f, radio_button: :shared_to, q_no: "06020", option: {no:"No" , all_of_my_children:"All of my children" , all_of_my_grandchildren:"All of my grandchildren"}, selected: 0
   %div{"data-condition" => ":checked", "data-false" => "hide" , "data-require" => "#cash_gift_shared_to_no", "data-true" => "show"}
     = render "layouts/text_field", :f => f, text_field: :first_name, origin: @cash_gift
     = render "layouts/text_field", :f => f, text_field: :middle_name, origin: @cash_gift

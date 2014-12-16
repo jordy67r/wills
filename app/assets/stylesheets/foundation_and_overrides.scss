@@ -1398,25 +1398,19 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     overflow: hidden;
     margin: 0;
     padding: 5px 3px;
-    font-size: 14px;
+    font-size: 0px;
     line-height: 20px;
     font-weight: bold;
     background-color: #fff;
+
 }
 .pika-title select {
-    cursor: pointer;
-    position: absolute;
-    z-index: 9998;
-    margin: 0;
-    left: 0;
-    top: 5px;
-    filter: alpha(opacity=0);
-    opacity: 0;
+    width: 100px;
 }
 
 .pika-prev,
 .pika-next {
-    display: block;
+    display: none;
     cursor: pointer;
     position: relative;
     outline: none;

@@ -5,12 +5,11 @@
 = form_for [@will, @executor] do |f|
 
   .field
-    = question "03060"
-    = f.check_box :replacement_first
-  %div{"data-condition" => ":checked", "data-require" => "#executor_replacement_first", "data-true" => "hide"}
+    = render "layouts/radio_buttons", :f => f, radio_button: :replacement_first, q_no: "03060", option: {true: "Yes", false: "No"}, selected: -1
+  %div{"data-condition" => ":checked", "data-require" => "#executor_replacement_first_true", "data-true" => "hide"}
     = f.submit 'Save', class: "button radius", :onclick => "return confirm('It is advisable to appoint a replacement executor. Are you sure you wish to proceed without appointing a replacement?')"
 
-%div{"data-condition" => ":checked", "data-require" => "#executor_replacement_first", "data-false" => "hide"}
+%div{"data-condition" => ":checked", "data-require" => "#executor_replacement_first_true", "data-false" => "hide"}
   = form_for [@will, @executor] do |f|
     = f.fields_for :first_replacement_executor_general_detail do |builder|
       = render "general_details/general_details_form", :builder => builder, :nested_origin => @executor.first_replacement_executor_general_detail
@@ -18,7 +17,7 @@
       = question "03070"
       = f.check_box :replacement_second
 
-    %div{"data-condition" => ":checked", "data-require" => "#executor_replacement_second", "data-false" => "hide"}
+    %div{"data-condition" => ":checked", "data-require" => "#executor_replacement_first_true", "data-false" => "hide"}
       = f.submit 'Save', class: "button radius"
-    %div{"data-condition" => ":checked", "data-require" => "#executor_replacement_second", "data-true" => "hide"}
+    %div{"data-condition" => ":checked", "data-require" => "#executor_replacement_first_true", "data-true" => "hide"}
       = f.submit 'Save', class: "button radius", :onclick => "return confirm('wish to proceed with only one appointed replacement?')"

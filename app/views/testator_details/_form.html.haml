@@ -20,7 +20,6 @@
   %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#testator_detail_planning_marrige_true", "data-true" => "show"}
     = render "layouts/radio_buttons", :f => f, radio_button: :effective_post_marrige, q_no: "01090", option: {true: "Yes", false: "No"}, selected: 0
     = render "layouts/radio_buttons", :f => f, radio_button: :effective_post_death_sans_marrige, q_no: "01110", option: {true: "Yes", false: "No"}, selected: 0
-  = render "layouts/radio_buttons", :f => f, radio_button: :tax_responsibility, advice_text: "If the recipients are not responsible for the taxes then the taxes will be paid from your estate, increasing the size of your gift, so consider whether your estate could afford to pay the taxes on all of the gifts", q_no: "01120", option: {true: "Yes", false: "No"}, selected: 0
   = render "layouts/radio_buttons", :f => f, radio_button: :mirror_will, q_no: "01130", option: {yes: "Yes", no: "No", not_applicable: "Not Applicable"}, selected: 2
 
   .button-region

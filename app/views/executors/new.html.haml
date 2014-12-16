@@ -3,13 +3,15 @@
 %hr
 
 = form_for [@will, @executor] do |f|
+  = render 'layouts/error_messages', object: f.object
 
   = render "layouts/radio_buttons", :f => f, radio_button: :notary_express, q_no: "03010", option: {true: "Yes", false: "No"}, selected: 0
   %div{"data-condition" => ":checked", "data-require" => "#executor_notary_express_false", "data-false" => "hide"}
     .radio-container
       = render "layouts/radio_buttons", :f => f, radio_button: :first, q_no: "03020", option: {true: "Yes", false: "No"}, selected: -1
   %div{"data-condition" => ":checked", "data-false" => "show", "data-require" => "#executor_notary_express_false", "data-true" => "hide"}
-    = render "layouts/radio_buttons", :f => f, radio_button: :second, q_no: "03030", option: {true: "Yes", false: "No"}, selected: -1
+    .radio-container
+      = render "layouts/radio_buttons", :f => f, radio_button: :second, q_no: "03030", option: {true: "Yes", false: "No"}, selected: -1
 
   .button-region
     %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#executor_first_false", "data-true" => "show"}

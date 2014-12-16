@@ -5,7 +5,7 @@
 
   = render "layouts/radio_buttons", :f => f, radio_button: :popular_charity, q_no: "07020", option: {true: "Yes", false: "No"}, selected: 0
   %div{"data-condition" => ":checked", "data-false" => "hide", "data-require" => "#charitable_donation_popular_charity_true", "data-true" => "show"}
-    = render "layouts/select_list", :f => f, select_list: :popular_charity_name, q_no: "07030", options: ["Arts Council England" , "British Heart Foundation" , "Cancer Research UK" , "Families Need Fathers" , "Macmillan" , "Royal Society for the Blind" , "Royal Society for the Prevention of Cruelty to Animals" , "The Salvation Army" , "Variety Club" , "Zoological Society of London"]
+    = render "layouts/select_list", :f => f, select_list: :popular_charity_name, q_no: "07030", options: ["Families Need Fathers" , "Arts Council England" , "British Heart Foundation" , "Cancer Research UK" , "Macmillan" , "Royal Society for the Blind" , "Royal Society for the Prevention of Cruelty to Animals" , "The Salvation Army" , "Variety Club" , "Zoological Society of London"]
 
   %div{"data-condition" => ":checked", "data-false" => "show", "data-require" => "#charitable_donation_popular_charity_true", "data-true" => "hide"}
     = render "layouts/text_field", :f => f, text_field: :name, q_no: "00180", origin: @charitable_donation
