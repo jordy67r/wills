@@ -40,4 +40,7 @@
 = link_to("Add Residuary", new_will_residuary_detail_path, class: "button radius")
 = link_to("Add Secondary Residuary", secondary_will_residuary_details_path(@will), class: "button radius")
 - if @correct_total == true || @total_percent == 100
-  = link_to("Proceed", new_will_residuary_path, class: "button radius")
+  - if @will.residuary
+    = link_to("Proceed", new_will_request_path, class: "button radius")
+  - else
+    = link_to("Proceed", new_will_residuary_path, class: "button radius")

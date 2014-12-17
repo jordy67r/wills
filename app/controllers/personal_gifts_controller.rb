@@ -1,5 +1,6 @@
 class PersonalGiftsController < ApplicationController
   before_action :set_personal_gift, only: [:show, :edit, :update, :destroy]
+  before_action :skip_option, only: [:option]
 
   def new
     @will = Will.find(params[:will_id])
@@ -28,7 +29,7 @@ class PersonalGiftsController < ApplicationController
         redirect_to new_will_personal_gift_path
       elsif params[:commit] == "Proceed"
         @will = Will.find(params[:will_id])
-        redirect_to new_will_residuary_detail_path
+        redirect_to option_will_residuary_details_path
       end
     else
       render :new
@@ -42,14 +43,24 @@ class PersonalGiftsController < ApplicationController
         redirect_to new_will_personal_gift_path
       elsif params[:commit] == "Proceed"
         @will = Will.find(params[:will_id])
-        redirect_to new_will_residuary_detail_path
+        redirect_to option_will_residuary_details_path
       end
     else
       render :edit
     end
   end
 
+  def option
+  end
+
   private
+  
+    def skip_option
+      @will = Will.find(params[:will_id])
+      @personal_gifts = @will.personal_gifts
+      redirect_to will_personal_gifts_path(@will) if @personal_gifts.any?
+    end
+
     def set_personal_gift
       @personal_gift = PersonalGift.find(params[:id])
     end

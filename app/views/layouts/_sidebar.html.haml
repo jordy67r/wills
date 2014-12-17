@@ -9,29 +9,28 @@
       = will_link(current_will.executor, "Executors", "executors")
       - if current_will.executor
         %ul.sub-list
-          = will_sub_link(current_will.executor, current_will.first_executor, "first_executor", "First Executor")
-          = will_sub_link(current_will.executor, current_will.second_executor, "second_executor", "Second Executor")
-          = will_sub_link(current_will.executor, current_will.third_executor, "third_executor", "Third Executor")
-          = will_sub_link(current_will.executor, current_will.forth_executor, "forth_executor", "Forth Executor")
-          = will_sub_link(current_will.executor, current_will.first_replacement_executor, "first_replacement_executor", "First Replacement Executor")
-          = will_sub_link(current_will.executor, current_will.second_replacement_executor, "second_replacement_executor", "Second Replacement Executor")
-          = will_sub_link(current_will.executor, current_will.third_replacement_executor, "third_replacement_executor", "Third Replacement Executor")
-          = will_sub_link(current_will.executor, current_will.forth_replacement_executor, "forth_replacement_executor", "Forth Replacement Executor")
-    - unless current_will.executor && current_will.executor.notary_express
+          = will_sub_link(current_will.executor, current_will.first_executor, "first_executor", current_will.first_executor.full_name) if current_will.first_executor
+          = will_sub_link(current_will.executor, current_will.second_executor, "second_executor", current_will.second_executor.full_name) if current_will.second_executor
+          = will_sub_link(current_will.executor, current_will.third_executor, "third_executor", current_will.third_executor.full_name) if current_will.third_executor
+          = will_sub_link(current_will.executor, current_will.forth_executor, "forth_executor", current_will.forth_executor.full_name) if current_will.forth_executor
+          = will_sub_link(current_will.executor, current_will.first_replacement_executor, "first_replacement_executor", current_will.first_replacement_executor.full_name) if current_will.first_replacement_executor
+          = will_sub_link(current_will.executor, current_will.second_replacement_executor, "second_replacement_executor", current_will.second_replacement_executor.full_name) if current_will.second_replacement_executor
+          = will_sub_link(current_will.executor, current_will.third_replacement_executor, "third_replacement_executor", current_will.third_replacement_executor.full_name) if current_will.third_replacement_executor
+          = will_sub_link(current_will.executor, current_will.forth_replacement_executor, "forth_replacement_executor", current_will.forth_replacement_executor.full_name) if current_will.forth_replacement_executor
       %li= will_link(current_will.administration, "Administration", "administrations")
     %li
       = will_link(current_will.guardian, "Guardians", "guardians")
       - if current_will.guardian 
         - if current_will.guardian.appoint_future_guardians || current_will.guardian.appoint_current_guardians
           %ul.sub-list
-            = will_sub_link(current_will.guardian, current_will.first_guardian, "first_guardian", "First Guardian")
-            = will_sub_link(current_will.guardian, current_will.second_guardian, "second_guardian", "Second Guardian")
-            = will_sub_link(current_will.guardian, current_will.third_guardian, "third_guardian", "Third Guardian")
-            = will_sub_link(current_will.guardian, current_will.forth_guardian, "forth_guardian", "Forth Guardian")
-            = will_sub_link(current_will.guardian, current_will.first_replacement_guardian, "first_replacement_guardian", "First Replacement Guardian")
-            = will_sub_link(current_will.guardian, current_will.second_replacement_guardian, "second_replacement_guardian", "Second Replacement Guardian")
-            = will_sub_link(current_will.guardian, current_will.third_replacement_guardian, "third_replacement_guardian", "Third Replacement Guardian")
-            = will_sub_link(current_will.guardian, current_will.forth_replacement_guardian, "forth_replacement_guardian", "Forth Replacement Guardian")
+            = will_sub_link(current_will.guardian, current_will.first_guardian, "first_guardian", current_will.first_guardian.full_name) if current_will.first_guardian
+            = will_sub_link(current_will.guardian, current_will.second_guardian, "second_guardian", current_will.second_guardian.full_name) if current_will.second_guardian
+            = will_sub_link(current_will.guardian, current_will.third_guardian, "third_guardian", current_will.third_guardian.full_name) if current_will.third_guardian
+            = will_sub_link(current_will.guardian, current_will.forth_guardian, "forth_guardian", current_will.forth_guardian.full_name) if current_will.forth_guardian
+            = will_sub_link(current_will.guardian, current_will.first_replacement_guardian, "first_replacement_guardian", current_will.first_replacement_guardian.full_name) if current_will.first_replacement_guardian
+            = will_sub_link(current_will.guardian, current_will.second_replacement_guardian, "second_replacement_guardian", current_will.second_replacement_guardian.full_name) if current_will.second_replacement_guardian
+            = will_sub_link(current_will.guardian, current_will.third_replacement_guardian, "third_replacement_guardian", current_will.third_replacement_guardian.full_name) if current_will.third_replacement_guardian
+            = will_sub_link(current_will.guardian, current_will.forth_replacement_guardian, "forth_replacement_guardian", current_will.forth_replacement_guardian.full_name) if current_will.forth_replacement_guardian
       %li 
         - if current_will.cash_gifts.any?
           = link_to("Cash Gifts", will_cash_gifts_path(current_will))

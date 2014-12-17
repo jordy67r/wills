@@ -49,7 +49,10 @@ Rails.application.routes.draw do
     resources :residuary_details, only: [:new, :edit, :create, :update, :index] do
         get :charity_benificiary
         get :people_benificiary 
-        collection { get :secondary }
+        collection do 
+          get :secondary
+          get :option
+        end
     end
     resources :requests, only: [:new, :edit, :create, :update]
   end
