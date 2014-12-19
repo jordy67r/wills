@@ -4,19 +4,19 @@ namespace :questions do
 
 Question.create(number: "00010", question: "Relationship") unless Question.find_by(number: "00010") 
 
-Question.create(number: "00020", question: "*First name") unless Question.find_by(number: "00020") 
+Question.create(number: "00020", question: "First name") unless Question.find_by(number: "00020") 
 
-Question.create(number: "00030", question: "*Middle name(s)") unless Question.find_by(number: "00030") 
+Question.create(number: "00030", question: "Middle name(s)") unless Question.find_by(number: "00030") 
 
-Question.create(number: "00040", question: "*Surname") unless Question.find_by(number: "00040") 
+Question.create(number: "00040", question: "Surname") unless Question.find_by(number: "00040") 
 
 Question.create(number: "00050", question: "Postcode") unless Question.find_by(number: "00050") 
 
-Question.create(number: "00060", question: "*Flat or house name/number") unless Question.find_by(number: "00060") 
+Question.create(number: "00060", question: "Flat or house name/number") unless Question.find_by(number: "00060") 
 
-Question.create(number: "00070", question: "*Street") unless Question.find_by(number: "00070") 
+Question.create(number: "00070", question: "Street") unless Question.find_by(number: "00070") 
 
-Question.create(number: "00080", question: "*City") unless Question.find_by(number: "00080") 
+Question.create(number: "00080", question: "City") unless Question.find_by(number: "00080") 
 
 Question.create(number: "00090", question: "County") unless Question.find_by(number: "00090") 
 
@@ -26,11 +26,11 @@ Question.create(number: "00110", question: "Land Registry title number (if known
 
 Question.create(number: "00120", question: "Postcode") unless Question.find_by(number: "00120") 
 
-Question.create(number: "00130", question: "*Flat or house name/number") unless Question.find_by(number: "00130") 
+Question.create(number: "00130", question: "Flat or house name/number") unless Question.find_by(number: "00130") 
 
-Question.create(number: "00140", question: "*Street") unless Question.find_by(number: "00140") 
+Question.create(number: "00140", question: "Street") unless Question.find_by(number: "00140") 
 
-Question.create(number: "00150", question: "*City") unless Question.find_by(number: "00150") 
+Question.create(number: "00150", question: "City") unless Question.find_by(number: "00150") 
 
 Question.create(number: "00160", question: "County") unless Question.find_by(number: "00160") 
 
@@ -42,11 +42,11 @@ Question.create(number: "00190", question: "Registered charity number") unless Q
 
 Question.create(number: "00200", question: "Postcode") unless Question.find_by(number: "00200") 
 
-Question.create(number: "00210", question: "*Flat or house name/number") unless Question.find_by(number: "00210") 
+Question.create(number: "00210", question: "Flat or house name/number") unless Question.find_by(number: "00210") 
 
-Question.create(number: "00220", question: "*Street") unless Question.find_by(number: "00220") 
+Question.create(number: "00220", question: "Street") unless Question.find_by(number: "00220") 
 
-Question.create(number: "00230", question: "*City") unless Question.find_by(number: "00230") 
+Question.create(number: "00230", question: "City") unless Question.find_by(number: "00230") 
 
 Question.create(number: "00240", question: "County") unless Question.find_by(number: "00240") 
 
@@ -62,11 +62,11 @@ Question.create(number: "01040", question: "Date of birth") unless Question.find
 
 Question.create(number: "01050", question: "What country do you consider to be your domicile?") unless Question.find_by(number: "01050") 
 
-Question.create(number: "01060", question: "*Do you have children?") unless Question.find_by(number: "01060") 
+Question.create(number: "01060", question: "Do you have children?") unless Question.find_by(number: "01060") 
 
-Question.create(number: "01070", question: "*Are any of your children under the age of 18?") unless Question.find_by(number: "01070") 
+Question.create(number: "01070", question: "Are any of your children under the age of 18?") unless Question.find_by(number: "01070") 
 
-Question.create(number: "01080", question: "*Are you planning to marry or form a civil partnership in the near future?") unless Question.find_by(number: "01080") 
+Question.create(number: "01080", question: "Are you planning to marry or form a civil partnership in the near future?") unless Question.find_by(number: "01080") 
 
 Question.create(number: "01090", question: "Do you want this will to be effective after the marriage or civil partnership?") unless Question.find_by(number: "01090") 
 
@@ -84,7 +84,7 @@ Question.create(number: "01160", question: "Date of birth") unless Question.find
 
 Question.create(number: "01170", question: "What country does your partner consider to be their domicile?") unless Question.find_by(number: "01170") 
 
-Question.create(number: "02010", question: "*Funeral preferences") unless Question.find_by(number: "02010") 
+Question.create(number: "02010", question: "Funeral preferences") unless Question.find_by(number: "02010") 
 
 Question.create(number: "02020", question: "My funeral wishes are that I would like to...") unless Question.find_by(number: "02020") 
 
@@ -92,9 +92,9 @@ Question.create(number: "02030", question: "Would you like to donate organs?") u
 
 Question.create(number: "02040", question: "The organs I would like to donate are my...") unless Question.find_by(number: "02040") 
 
-Question.create(number: "03010", question: "*Would you like to appoint Notary Express as a professional executor?") unless Question.find_by(number: "03010") 
+Question.create(number: "03010", question: "Would you like to appoint Notary Express as a professional executor?") unless Question.find_by(number: "03010") 
 
-Question.create(number: "03020", question: "*Would you like to appoint an executor?") unless Question.find_by(number: "03020") 
+Question.create(number: "03020", question: "Would you like to appoint an executor?") unless Question.find_by(number: "03020") 
 
 Question.create(number: "03030", question: "Appoint a 2nd executor?") unless Question.find_by(number: "03030") 
 
@@ -102,7 +102,7 @@ Question.create(number: "03040", question: "Appoint a 3rd executor?") unless Que
 
 Question.create(number: "03050", question: "Appoint a 4th executor?") unless Question.find_by(number: "03050") 
 
-Question.create(number: "03060", question: "*Would you like to appoint a replacement executor?") unless Question.find_by(number: "03060") 
+Question.create(number: "03060", question: "Would you like to appoint a replacement executor?") unless Question.find_by(number: "03060") 
 
 Question.create(number: "03070", question: "Appoint a 2nd replacement executor?") unless Question.find_by(number: "03070") 
 
@@ -168,7 +168,7 @@ Question.create(number: "07060", question: "Add a 2nd donation to charity?") unl
 
 Question.create(number: "07070", question: "Tick to permit your executors to choose an alternative charity if the one(s) you selected do not exist for any reason at the date of your death (advisable)") unless Question.find_by(number: "07070") 
 
-Question.create(number: "08010", question: "Would you life to make a specific gift of a building or land?") unless Question.find_by(number: "08010") 
+Question.create(number: "08010", question: "Would you like to make a specific gift of a building or land?") unless Question.find_by(number: "08010") 
 
 Question.create(number: "08020", question: "Is this a gift of your sole or main residence?") unless Question.find_by(number: "08020") 
 

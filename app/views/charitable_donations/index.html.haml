@@ -1,15 +1,12 @@
 - provide(:title, "Charitable Donations")
-
-%h1 Charitable Donations
-%h4.subheader You can make cash gifts to charities.
-%hr
-
-
+= render 'header'
 %table
   %thead
     %tr
-      %th Donation
-      %th Amount
+      %th 
+        %h5 Donation
+      %th 
+        %h5 Amount
   %tbody
     - @charitable_donations.each_with_index do |charitable_donation, i|
       %tr

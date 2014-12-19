@@ -1,6 +1,3 @@
-
-%h2.section-sub-heading You can make specific gifts of money.
-%hr
 = form_for [@will, @cash_gift] do |f|
 
   = render "layouts/radio_buttons", :f => f, radio_button: :shared_to, q_no: "06020", option: {no:"No" , all_of_my_children:"All of my children" , all_of_my_grandchildren:"All of my grandchildren"}, selected: 0
