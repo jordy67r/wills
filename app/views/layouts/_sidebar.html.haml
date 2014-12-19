@@ -17,6 +17,7 @@
           = will_sub_link(current_will.executor, current_will.second_replacement_executor, "second_replacement_executor", current_will.second_replacement_executor.full_name) if current_will.second_replacement_executor
           = will_sub_link(current_will.executor, current_will.third_replacement_executor, "third_replacement_executor", current_will.third_replacement_executor.full_name) if current_will.third_replacement_executor
           = will_sub_link(current_will.executor, current_will.forth_replacement_executor, "forth_replacement_executor", current_will.forth_replacement_executor.full_name) if current_will.forth_replacement_executor
+    - if current_will.administration || current_will.progress < 5
       %li= will_link(current_will.administration, "Administration", "administrations")
     %li
       = will_link(current_will.guardian, "Guardians", "guardians")
@@ -32,7 +33,7 @@
             = will_sub_link(current_will.guardian, current_will.third_replacement_guardian, "third_replacement_guardian", current_will.third_replacement_guardian.full_name) if current_will.third_replacement_guardian
             = will_sub_link(current_will.guardian, current_will.forth_replacement_guardian, "forth_replacement_guardian", current_will.forth_replacement_guardian.full_name) if current_will.forth_replacement_guardian
       %li 
-        - if current_will.cash_gifts.any?
+        - if current_will.progress >= 7
           = link_to("Cash Gifts", will_cash_gifts_path(current_will))
           %ul.sub-list
             - current_will.cash_gifts.each_with_index do |cash_gift, i|
@@ -40,7 +41,7 @@
         - else
           %span Cash Gifts
       %li 
-        - if current_will.charitable_donations.any?
+        - if current_will.progress >= 8
           = link_to("Charitable Donations", will_charitable_donations_path(current_will))
           %ul.sub-list
             - current_will.charitable_donations.each_with_index do |charitable_donations, i|
@@ -57,10 +58,13 @@
           %ul.sub-list
             - current_will.properties.where(complete: true).each_with_index do |property, i|
               %li= will_link(property, property.postcode, "nothing")
+        - elsif
+          - if current_will.progress >= 10
+            = link_to("Property", will_properties_path(current_will))
         - else
           %span Property
       %li 
-        - if current_will.personal_gifts.any?
+        - if current_will.progress >= 11
           = link_to("Personal Gifts", will_personal_gifts_path(current_will))
           %ul.sub-list
             - current_will.personal_gifts.each_with_index do |personal_gifts, i|
@@ -68,7 +72,7 @@
         - else
           %span Personal Gifts
       %li 
-        - if current_will.residuary_details.any?
+        - if current_will.progress >= 12
           = link_to("Residuary", will_residuary_details_path(current_will))
           %ul.sub-list
             - current_will.residuary_details.where(complete:true).each_with_index do |residuaries, i|

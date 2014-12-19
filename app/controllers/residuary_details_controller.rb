@@ -1,6 +1,9 @@
 class ResiduaryDetailsController < ApplicationController
   before_action :set_residuary_detail, only: [:show, :edit, :update, :destroy]
   before_action :skip_option, only: [:option]
+  before_action only: :new do
+    update_will_progress 12
+  end
 
   def new
     @will = Will.find(params[:will_id])

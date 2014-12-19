@@ -1,6 +1,9 @@
 class CharitableDonationsController < ApplicationController
   before_action :set_charitable_donation, only: [:show, :edit, :update, :destroy]
   before_action :skip_option, only: [:option]
+  after_action only: :option do
+    update_will_progress 8
+  end
 
   def new
     @will = Will.find(params[:will_id])

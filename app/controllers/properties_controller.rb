@@ -1,6 +1,9 @@
 class PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
   before_action :skip_option, only: [:option]
+  after_action only: :option do
+    update_will_progress 10
+  end
 
   def new
     @will = Will.find(params[:will_id])
