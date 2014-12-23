@@ -28,7 +28,14 @@
           = residuary.if_dead_certain_age ? "." : "to be paid only when they reach the age of 16-40."
 
       - if residuary.residuary_type == "Charity"
-        = "to #{residuary.charity_residuary_general_detail.name}, registered charity number or HMRC number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}."
+        - if residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != "" && residuary.charity_residuary_general_detail.full_address.gsub(/\s+/, "") != ""
+          = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}. "
+        - elsif residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != ""
+          = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number}. "
+        - elsif residuary.charity_residuary_general_detail.full_address.gsub(/\s+/, "") != ""
+          = "to #{residuary.charity_residuary_general_detail.name}, of #{residuary.charity_residuary_general_detail.full_address}. "
+        - else
+          = "to #{residuary.charity_residuary_general_detail.name}. "
 
 - @pr_shared = @primary_residuaries.where(share: "Equal shares")
 - @pr_trust = @primary_residuaries.where(share: "Trustees to decide")
@@ -38,30 +45,37 @@
   %p The remainder to be shared equally as follows:
 - elsif @pr_trust.any?
   - @res = @pr_trust
-  %p The remainder to be sharedas the trustees see fit as follows:
-  - @res.each do |residuary|
-    %p 
-      - if residuary.residuary_type == "My children"
-        To my children including any future children I have after the date of creation of this will.
-        = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
-        - if residuary.if_dead == "allocated_to_their_children"
-          = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
+  %p The remainder to be shared as the trustees see fit as follows:
+- @res.each do |residuary|
+  %p 
+    - if residuary.residuary_type == "My children"
+      To my children including any future children I have after the date of creation of this will.
+      = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
+      - if residuary.if_dead == "allocated_to_their_children"
+        = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
 
-      - if residuary.residuary_type == "My grandchildren"
-        To my grandchildren
-        = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
-        - if residuary.if_dead == "allocated_to_their_children" 
-          = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
+    - if residuary.residuary_type == "My grandchildren"
+      To my grandchildren
+      = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
+      - if residuary.if_dead == "allocated_to_their_children" 
+        = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
 
-      - if residuary.residuary_type == "Individual"
-        = "To #{residuary.individual_residuary_general_detail.full_name} of #{residuary.individual_residuary_general_detail.full_address}"
-        = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
-        - if residuary.if_dead == "allocated_to_their_children"
-          Should the aforementioned individual predecease me this gift shall instead fall to their child(ren) in equal shares
-          = residuary.if_dead_certain_age ? "." : "to be paid only when they reach the age of 16-40."
+    - if residuary.residuary_type == "Individual"
+      = "To #{residuary.individual_residuary_general_detail.full_name} of #{residuary.individual_residuary_general_detail.full_address}"
+      = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
+      - if residuary.if_dead == "allocated_to_their_children"
+        Should the aforementioned individual predecease me this gift shall instead fall to their child(ren) in equal shares
+        = residuary.if_dead_certain_age ? "." : "to be paid only when they reach the age of 16-40."
 
-      - if residuary.residuary_type == "Charity"
-        = "To #{residuary.charity_residuary_general_detail.name}, registered charity number or HMRC number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}."
+    - if residuary.residuary_type == "Charity"
+      - if residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != "" && residuary.charity_residuary_general_detail.address_one.gsub(/\s+/, "") != ""
+        = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}. "
+      - elsif residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != ""
+        = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number}. "
+      - elsif residuary.charity_residuary_general_detail.address_one.gsub(/\s+/, "") != ""
+        = "to #{residuary.charity_residuary_general_detail.name}, of #{residuary.charity_residuary_general_detail.full_address}. "
+      - else
+        = "to #{residuary.charity_residuary_general_detail.name}. "
 
 
 - if @secondary_residuaries.any?
@@ -93,8 +107,14 @@
             = residuary.if_dead_certain_age ? "." : "to be paid only when they reach the age of 16-40."
 
         - if residuary.residuary_type == "Charity"
-          = "to #{residuary.charity_residuary_general_detail.name}, registered charity number or HMRC number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}."
-
+          - if residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != "" && residuary.charity_residuary_general_detail.full_address.gsub(/\s+/, "") != ""
+            = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}. "
+          - elsif residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != ""
+            = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number}. "
+          - elsif residuary.charity_residuary_general_detail.full_address.gsub(/\s+/, "") != ""
+            = "to #{residuary.charity_residuary_general_detail.name}, of #{residuary.charity_residuary_general_detail.full_address}. "
+          - else
+            = "to #{residuary.charity_residuary_general_detail.name}. "
 
   - @pr_shared = @secondary_residuaries.where(share: "Equal shares")
   - @pr_trust = @secondary_residuaries.where(share: "Trustees to decide")
@@ -105,30 +125,37 @@
   - elsif @pr_trust.any?
     - @res = @pr_trust
     %p The remainder to be sharedas the trustees see fit as follows:
-    - @res.each do |residuary|
+  - @res.each do |residuary|
 
-      %p 
-        - if residuary.residuary_type == "My children"
-          To my children including any future children I have after the date of creation of this will.
-          = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
-          - if residuary.if_dead == "allocated_to_their_children"
-            = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
+    %p 
+      - if residuary.residuary_type == "My children"
+        To my children including any future children I have after the date of creation of this will.
+        = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
+        - if residuary.if_dead == "allocated_to_their_children"
+          = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
 
-        - if residuary.residuary_type == "My grandchildren"
-          To my grandchildren
-          = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
-          - if residuary.if_dead == "allocated_to_their_children" 
-            = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
+      - if residuary.residuary_type == "My grandchildren"
+        To my grandchildren
+        = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
+        - if residuary.if_dead == "allocated_to_their_children" 
+          = residuary.if_dead_certain_age ? "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares." : "Should any of my children predecease me this gift shall instead fall to their child(ren) in equal shares to be paid only when they reach the age of 16-40."
 
-        - if residuary.residuary_type == "Individual"
-          = "To #{residuary.individual_residuary_general_detail.full_name} of #{residuary.individual_residuary_general_detail.full_address}"
-          = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
-          - if residuary.if_dead == "allocated_to_their_children"
-            Should the aforementioned individual predecease me this gift shall instead fall to their child(ren) in equal shares
-            = residuary.if_dead_certain_age ? "." : "to be paid only when they reach the age of 16-40."
+      - if residuary.residuary_type == "Individual"
+        = "To #{residuary.individual_residuary_general_detail.full_name} of #{residuary.individual_residuary_general_detail.full_address}"
+        = residuary.certain_age == "no" ? "absolutely." : "to be paid only when the aforementioned individual reaches the age of #{residuary.certain_age}."
+        - if residuary.if_dead == "allocated_to_their_children"
+          Should the aforementioned individual predecease me this gift shall instead fall to their child(ren) in equal shares
+          = residuary.if_dead_certain_age ? "." : "to be paid only when they reach the age of 16-40."
 
-        - if residuary.residuary_type == "Charity"
-          = "To #{residuary.charity_residuary_general_detail.name}, registered charity number or HMRC number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}."
+      - if residuary.residuary_type == "Charity"
+        - if residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != "" && residuary.charity_residuary_general_detail.full_address.gsub(/\s+/, "") != ""
+          = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number} of #{residuary.charity_residuary_general_detail.full_address}. "
+        - elsif residuary.charity_residuary_general_detail.registered_charity_number.gsub(/\s+/, "") != ""
+          = "to #{residuary.charity_residuary_general_detail.name}, registered charity number #{residuary.charity_residuary_general_detail.registered_charity_number}. "
+        - elsif residuary.charity_residuary_general_detail.full_address.gsub(/\s+/, "") != ""
+          = "to #{residuary.charity_residuary_general_detail.name}, of #{residuary.charity_residuary_general_detail.full_address}. "
+        - else
+          = "to #{residuary.charity_residuary_general_detail.name}. "
   
 
 %p= "#{@count}.3 While a beneficiary of the trust is under the age specified for inheritance, the Trustees may pay up to #{@residuary.amount_allowed_to_distribute} of the capital of the beneficiary's share of the Trust Fund to the beneficiary or use it for his or her benefit. OR Section 32 of the Trustee Act 1925 does not apply to the trusts in this clause."
