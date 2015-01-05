@@ -6,7 +6,7 @@
   = f.fields_for :general_detail do |builder|
     = render "general_details/general_details_form", :builder => builder, :nested_origin => @testator_detail.general_detail
 
-  = render "layouts/text_field", :f => f, text_field: :phone_no, q_no: "01020", origin: @testator_detail
+  = render "layouts/text_field", :f => f, text_field: :phone_no, q_no: "01020", origin: @testator_detail, label_text: "Phone Number"
   = render "layouts/select_list", :f => f, select_list: :gender, q_no: "01030", options: ["Male", "Female"], origin: @testator_detail
   .pikaday
     = render "layouts/text_field", :f => f, text_field: :dob, q_no: "01040", origin: @testator_detail
